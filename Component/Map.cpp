@@ -1,8 +1,16 @@
 #include <iostream>
 #include "Map.h"
 #include <random>
+#include <iomanip>
 
 using namespace std;
+/* initial constructor which generates a 2D array with given size,
+ * it creates an array with y length,
+ * and it creates arrays with in each cell of the outer array.
+ * for the designed game board:
+ * Y -> vertical size
+ * X -> horizontal size
+ * */
 Map::Map(int x, int y) {
     if(x <= 0 || y <= 0){
         cout << "Error!! X and Y lengths can not be less than zero!!" << endl;
@@ -10,20 +18,18 @@ Map::Map(int x, int y) {
     }
     this->x=x;
     this->y=y;
-    cout<< "Generating ["<< x << " X "<< y<<"] game board"<<endl;
-    cout<< "X -> " << x<< endl;
-    cout<< "Y -> " << y<< endl;
-    this->grid = new int*[y];
+    cout<< "==> Generating ["<< y << " X "<< x <<"] game board"<<endl;
+    this->board = new int*[y];
     for (int i = 0; i < y; i++) {
-        this->grid[i] = new int[x];
+        this->board[i] = new int[x];
         for (int j = 0; j < x; j++) {
-            this->grid[i][j] = 0;
+            this->board[i][j] = 0;
         }
     }
 }
 
 Map::~Map(){
-    delete[] this->grid;
+    delete[] this->board;
 }
 
 void Map::display() {
@@ -33,7 +39,7 @@ void Map::display() {
 
         // Display the contents of each cell in the current row
         for (int j = 0; j < x; j++) {
-            cout << "|" << DISPLAY[this->grid[i][j]];
+            cout << "|" << DISPLAY[this->board[i][j]];
         }
         cout << "| " << i + 1 << endl;
     }
@@ -42,44 +48,71 @@ void Map::display() {
 
     // Display the column numbers at the bottom of the board
     for (int i = 0; i < x; i++) {
-        cout << "  " << i + 1 << " ";
+        cout << setw(4) << i + 1;
     }
+    //Move to the next line
+    cout << endl;
 }
 
-/* generate a number in the range of given bounds:
- * for example: given range -> 1 - 10,
- * it will generate number -> 0 - 9,
- * which corresponding to the array index.
- * no checking is needed
+/* place a character randomly,
+ * the do-while loop will continue generating random coordinates,
+ * until there is no collision at the generated coordinate,
+ * input integer presents the role which is being placed,
+ * character number-> {[0]: empty block, [1]: T,[2]: H, [3]: C, [4]: O, [5]: R}.
  * */
-int Map::random_number_generator(int range) {
-    return (rand() % range);
-}
-
-//Place a character -> {[1]: T,[2]: H, [3]: C, [4]: O, [5]: R}
-void Map::place(int character) {
+void Map::rand_place(int character) {
     int rand_i;
     int rand_j;
     do {
         rand_i=random_number_generator(y);
         rand_j=random_number_generator(x);
-    } while (!check_collision(rand_i,rand_j)); {
-        grid[rand_i][rand_j] = character;
+        cout << "==> Placing character [" <<DISPLAY[character]<<"] to coordinate [" << rand_i+1<<" X " <<rand_j+1<<"]" << endl;
+    } while (!check_collision(rand_i, rand_j));
+    board[rand_i][rand_j] = character;
+}
+
+/* place a character in a given coordinate,
+ * input integer presents the role which is being placed,
+ * character number-> {[0]: empty block, [1]: T,[2]: H, [3]: C, [4]: O, [5]: R}.
+ * */
+void Map::placeAt(int input_X, int input_Y, int character) {
+    if(check_boundary(input_X,input_Y)){
+        if(check_collision(input_X-1,input_Y-1)){
+            board[input_X-1][input_Y-1] = character;
+            cout << "==> Placing character [" <<DISPLAY[character]<<"] to coordinate [" << input_X<<" X " <<input_Y<<"]" << endl;
+        } else {
+            cout << "Error!! Coordinate at: [" << input_X<<" X " <<input_Y<<"] is not empty!!" << endl;
+        }
+    } else {
+        cout << "Error!! Input: [" << input_X<<" X " <<input_Y<<"] is out of bound!!" << endl;
     }
 }
 
-string Map::getXY(int input_i,int input_j) {
-    if(!check_boundary(input_i,input_j)){
+string Map::getXY(int input_X,int input_Y) {
+    if(!check_boundary(input_X,input_Y)){
         return "Error!! Input out of bound!!";
     } else {
-        return DISPLAY[grid[input_i-1][input_j-1]];
+        return DISPLAY[board[input_X-1][input_Y-1]];
     }
 }
 
-bool Map::check_collision(int input_X,int input_Y) {
-    return grid[input_X][input_Y]==0;
+/* helper function for rand_place:
+ * generate a random number in the range of given bounds,
+ * for example: given range -> 1 - 10,
+ * it will generate number -> 0 - 9,
+ * which corresponds to the array index.
+ * no checking is needed.
+ * */
+int Map::random_number_generator(int range) {
+    return (rand() % range);
 }
 
-bool Map::check_boundary(int input_i, int input_j) {
-    return input_i <= x && input_j <= y && input_i >= 1 && input_j >= 1;
+// helper function for placeAt & rand_place, which checks for collision.
+bool Map::check_collision(int input_X,int input_Y) {
+    return board[input_X][input_Y]==0;
+}
+
+//helper function for placeAt & rand_place, which checks for boundary.
+bool Map::check_boundary(int input_X, int input_Y) {
+    return input_X <= y && input_Y <= x && input_X >= 1 && input_Y >= 1;
 }
