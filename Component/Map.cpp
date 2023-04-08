@@ -76,16 +76,25 @@ void Map::rand_place(int character) {
  * character number-> {[0]: empty block, [1]: T,[2]: H, [3]: C, [4]: O, [5]: R}.
  * */
 void Map::placeAt(int input_X, int input_Y, int character) {
-    if(check_boundary(input_X,input_Y)){
-        if(check_collision(input_X-1,input_Y-1)){
-            board[input_X-1][input_Y-1] = character;
-            cout << "==> Placing character [" <<DISPLAY[character]<<"] to coordinate [" << input_X<<" X " <<input_Y<<"]" << endl;
-        } else {
-            cout << "Error!! Coordinate at: [" << input_X<<" X " <<input_Y<<"] is not empty!!" << endl;
-        }
-    } else {
+
+    if(!check_boundary(input_X,input_Y)){
         cout << "Error!! Input: [" << input_X<<" X " <<input_Y<<"] is out of bound!!" << endl;
+    } else if(!check_collision(input_X-1,input_Y-1)){
+        cout << "Error!! Coordinate at: [" << input_X<<" X " <<input_Y<<"] is not empty!!" << endl;
+    } else {
+        board[input_X-1][input_Y-1] = character;
+        cout << "==> Placing character [" <<DISPLAY[character]<<"] to coordinate [" << input_X<<" X " <<input_Y<<"]" << endl;
     }
+//    if(check_boundary(input_X,input_Y)){
+//        if(check_collision(input_X-1,input_Y-1)){
+//            board[input_X-1][input_Y-1] = character;
+//            cout << "==> Placing character [" <<DISPLAY[character]<<"] to coordinate [" << input_X<<" X " <<input_Y<<"]" << endl;
+//        } else {
+//            cout << "Error!! Coordinate at: [" << input_X<<" X " <<input_Y<<"] is not empty!!" << endl;
+//        }
+//    } else {
+//        cout << "Error!! Input: [" << input_X<<" X " <<input_Y<<"] is out of bound!!" << endl;
+//    }
 }
 
 string Map::getXY(int input_X,int input_Y) {
