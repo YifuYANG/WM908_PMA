@@ -4,7 +4,7 @@
 using namespace std;
 class Map {
 private :
-    int x,y;
+    int x=0,y=0;
     //block (#), vegetation (T), herbivore (H), carnivore (C), omnivore (O), hunter (R)
     const string DISPLAY [7] = {"   "," # "," T ", " H "," C "," O ", " R "};
     //private helper functions

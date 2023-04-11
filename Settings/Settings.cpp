@@ -1,11 +1,11 @@
-#include "Movement_Settings.h"
+#include "Settings.h"
 #include <iostream>
 #include <random>
 #include <iomanip>
 
 using namespace std;
 
-void Movement_Settings::move_oneRound(Map map) {
+void Settings::move_oneRound(Map map) {
     for(int i=0;i<map.getY();i++){
         for(int j=0;j<map.getX();j++){
             if(map.board[i][j]==0 || map.board[i][j]==1){
@@ -33,11 +33,11 @@ void Movement_Settings::move_oneRound(Map map) {
  * 3 -> move to South,
  * 4 -> move to North.
  * */
-int Movement_Settings::random_direction_generator() {
+int Settings::random_direction_generator() {
     return (rand() % 4)+1;
 }
 
-bool Movement_Settings::rule_stopMoving(int current_X, int current_Y, int next_X,int next_Y,int board_X, int board_Y) {
+bool Settings::rule_stopMoving(int current_X, int current_Y, int next_X, int next_Y, int board_X, int board_Y) {
 //    if(current_X>board_X-1){
 //        return false;
 //    } else if(current_Y>board_Y-1){

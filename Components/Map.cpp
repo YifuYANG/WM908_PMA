@@ -29,7 +29,10 @@ Map::Map(int x, int y) {
 }
 
 Map::~Map(){
-    //delete[] this->board;
+    for (int i = 0; i < y; i++) {
+        delete[] this->board[i];
+    }
+    delete[] this->board;
 }
 
 void Map::display() {

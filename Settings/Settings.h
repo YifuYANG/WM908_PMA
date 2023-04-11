@@ -1,10 +1,10 @@
-#ifndef PMA_MOVEMENT_SETTINGS_H
-#define PMA_MOVEMENT_SETTINGS_H
+#ifndef PMA_SETTINGS_H
+#define PMA_SETTINGS_H
 
 #include "iostream"
 #include "../Components/Map.h"
 using namespace std;
-class Movement_Settings {
+class Settings {
 private:
     enum MP {
         East = 0,
@@ -20,4 +20,4 @@ public:
 };
 
 
-#endif //PMA_MOVEMENT_SETTINGS_H
+#endif //PMA_SETTINGS_H
