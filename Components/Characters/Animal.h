@@ -4,21 +4,17 @@
 using namespace std;
 class Animal {
 private:
-    enum MP {
-        East = 0,
-        West = 1,
-        South = 2,
-        North = 3
-    };
+    int X,Y;
+    bool whether_this_animal_has_moved_or_not;
 
-    bool whether_this_animal_has_moved_or_not=false;
-    int MP;
+    int movement_parameter_generator();
+
+    bool check_boundary(int X, int Y,int boundary_X, int boundary_Y);
+
 public:
-    Animal(bool isMoved);
+    Animal(int X, int Y);
 
-    bool check_whether_this_animal_has_moved_or_not();
-
-    void setIsMoved(bool isMoved);
+    Animal();
 
     void move();
 };

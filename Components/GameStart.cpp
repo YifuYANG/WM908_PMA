@@ -1,5 +1,5 @@
 #include "GameStart.h"
-
+#include "../Components/Characters/Animal.h"
 GameStart::GameStart() = default;
 
 /* helper function for move:
@@ -32,7 +32,6 @@ GameStart & GameStart::move_oneRound() {
             if(initializedBoard->board[i][j]==0 || initializedBoard->board[i][j]==1){
                 continue;
             } else {
-                //int direction=3;
                 int direction = random_direction_generator();
                 if (direction == 1 && check_collision(i,j+1) && check_boundary(i,j+1)) {
                     initializedBoard->board[i][j+1]=initializedBoard->board[i][j];
@@ -55,8 +54,11 @@ GameStart & GameStart::move_oneRound() {
 }
 
 GameStart & GameStart::place_random_characters_at_random_locations_on_the_board() {
-    for(int i=0;i<7; i++){
-        initializedBoard->rand_place(rand() % 6+1);
+    for(int i=0;i<15; i++){
+        int rand_X=random_number_generator(initializedBoard->getY());
+        int rand_Y=random_number_generator(initializedBoard->getX());
+        initializedBoard->placeAt(rand_X,rand_Y,rand() % 6+1);
+        Animal animal(rand_X,rand_Y);
     }
     return *this;
 }
@@ -67,6 +69,16 @@ bool GameStart::check_collision(int X, int Y) {
 
 bool GameStart::check_boundary(int X, int Y) {
     return X+1 <= initializedBoard->getY() && Y+1 <= initializedBoard->getX();
+}
+
+/* helper function for place_random_characters_at_random_locations_on_the_board:
+ * generate a random number in the range of given bounds,
+ * for example: given range -> 1 - 10,
+ * it will generate number -> 0 - 9,
+ * which corresponds to the array index.
+ * */
+int GameStart::random_number_generator(int range) {
+    return rand() % range;
 }
 
 

@@ -57,42 +57,21 @@ void Map::display() {
     cout << endl;
 }
 
-/* place a character randomly,
- * the do-while loop will continue generating random coordinates,
- * until there is no collision at the generated coordinate,
- * input integer presents the role which is being placed,
- * character number-> {[0]: empty, [1] #, [2]: T, [3]: H, [4]: C, [5]: O, [6]: R}.
- * */
-void Map::rand_place(int character) {
-    int rand_i;
-    int rand_j;
-    do {
-        rand_i=random_number_generator(y);
-        rand_j=random_number_generator(x);
-    } while (!check_collision(rand_i, rand_j));
-    board[rand_i][rand_j] = character;
-    if(std::equal(DISPLAY[character].begin(), DISPLAY[character].end()," # ")){
-        cout << "==> Placing block [" <<DISPLAY[character]<<"] to coordinate [" << rand_i+1<<" X " <<rand_j+1<<"]" << endl;
-    } else {
-        cout << "==> Placing character [" <<DISPLAY[character]<<"] to coordinate [" << rand_i+1<<" X " <<rand_j+1<<"]" << endl;
-    }
-}
-
 /* place a character in a given coordinate,
  * input integer presents the role which is being placed,
  * character number-> {[0]: empty, [1] #, [2]: T, [3]: H, [4]: C, [5]: O, [6]: R}.
  * */
 void Map::placeAt(int input_X, int input_Y, int character) {
-    if(!check_boundary(input_X,input_Y)){
-        cout << "Error!! Input: [" << input_X<<" X " <<input_Y<<"] is out of bound!!" << endl;
-    } else if(!check_collision(input_X-1,input_Y-1)){
-        cout << "Error!! Coordinate at: [" << input_X<<" X " <<input_Y<<"] is not empty!!" << endl;
+    if(!check_boundary(input_X+1,input_Y+1)){
+        cout << "Error!! Input: [" << input_X+1<<" X " <<input_Y+1<<"] is out of bound!!" << endl;
+    } else if(!check_collision(input_X,input_Y)){
+        cout << "Error!! Coordinate at: [" << input_X+1<<" X " <<input_Y+1<<"] is not empty!!" << endl;
     } else {
-        board[input_X-1][input_Y-1] = character;
+        board[input_X][input_Y] = character;
         if(std::equal(DISPLAY[character].begin(), DISPLAY[character].end()," # ")){
-            cout << "==> Placing block [" <<DISPLAY[character]<<"] to coordinate [" << input_X<<" X " <<input_Y<<"]" << endl;
+            cout << "==> Placing block [" <<DISPLAY[character]<<"] to coordinate [" << input_X+1<<" X " <<input_Y+1<<"]" << endl;
         } else {
-            cout << "==> Placing character [" <<DISPLAY[character]<<"] to coordinate [" << input_X<<" X " <<input_Y<<"]" << endl;
+            cout << "==> Placing character [" <<DISPLAY[character]<<"] to coordinate [" << input_X+1<<" X " <<input_Y+1<<"]" << endl;
         }
     }
 }
@@ -103,17 +82,6 @@ string Map::getXY(int input_X,int input_Y) {
     } else {
         return DISPLAY[board[input_X-1][input_Y-1]];
     }
-}
-
-/* helper function for rand_place:
- * generate a random number in the range of given bounds,
- * for example: given range -> 1 - 10,
- * it will generate number -> 0 - 9,
- * which corresponds to the array index.
- * no checking is needed.
- * */
-int Map::random_number_generator(int range) {
-    return (rand() % range);
 }
 
 // helper function for placeAt & rand_place, which checks for collision.
