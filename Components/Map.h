@@ -1,6 +1,7 @@
 #ifndef PMA_MAP_H
 #define PMA_MAP_H
 #include "iostream"
+//#include "../Components/Characters/Animal.h"
 using namespace std;
 class Map {
 private :

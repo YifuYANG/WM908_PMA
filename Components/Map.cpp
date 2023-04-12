@@ -123,7 +123,7 @@ bool Map::check_collision(int input_X,int input_Y) {
 
 //helper function for placeAt & rand_place, which checks for boundary.
 bool Map::check_boundary(int input_X, int input_Y) {
-    return input_X <= y && input_Y <= x && input_X >= 1 && input_Y >= 1;
+    return input_X <= y && input_Y <= x;
 }
 
 int Map::getX() const {

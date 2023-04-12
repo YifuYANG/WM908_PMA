@@ -32,15 +32,21 @@ GameStart & GameStart::move_oneRound() {
             if(initializedBoard->board[i][j]==0 || initializedBoard->board[i][j]==1){
                 continue;
             } else {
+                //int direction=3;
                 int direction = random_direction_generator();
-                if (direction == 1 && j < initializedBoard->getX() - 1) {
-                    swap(initializedBoard->board[i][j], initializedBoard->board[i][j+1]);
-                } else if (direction == 2 && j > 0) {
-                    swap(initializedBoard->board[i][j], initializedBoard->board[i][j-1]);
-                } else if (direction == 3 && i < initializedBoard->getY() - 1) {
-                    swap(initializedBoard->board[i][j], initializedBoard->board[i+1][j]);
-                } else if (direction == 4 && i > 0) {
-                    swap(initializedBoard->board[i][j], initializedBoard->board[i-1][j]);
+                if (direction == 1 && check_collision(i,j+1) && check_boundary(i,j+1)) {
+                    initializedBoard->board[i][j+1]=initializedBoard->board[i][j];
+                    initializedBoard->board[i][j]=0;
+                } else if (direction == 2 && check_collision(i,j-1) && check_boundary(i,j-1)) {
+                    initializedBoard->board[i][j-1]=initializedBoard->board[i][j];
+                    initializedBoard->board[i][j]=0;
+                } else if (direction == 3 && check_collision(i+1,j) && check_boundary(i+1,j)) {
+                    initializedBoard->board[i+1][j]=initializedBoard->board[i][j];
+                    initializedBoard->board[i][j]=0;
+                    //cout<<i<<"--"<<j<<endl;
+                } else if (direction == 4 && check_collision(i-1,j) && check_boundary(i-1,j)) {
+                    initializedBoard->board[i-1][j]=initializedBoard->board[i][j];
+                    initializedBoard->board[i][j]=0;
                 }
             }
         }
@@ -49,11 +55,18 @@ GameStart & GameStart::move_oneRound() {
 }
 
 GameStart & GameStart::place_random_characters_at_random_locations_on_the_board() {
-//    for(int i=0;i<7; i++){
-//        initializedBoard->rand_place(rand() % 6+1);
-//    }
-    initializedBoard->rand_place(rand() % 6+1);
+    for(int i=0;i<7; i++){
+        initializedBoard->rand_place(rand() % 6+1);
+    }
     return *this;
+}
+
+bool GameStart::check_collision(int X, int Y) {
+    return initializedBoard->board[X][Y]==0;
+}
+
+bool GameStart::check_boundary(int X, int Y) {
+    return X+1 <= initializedBoard->getY() && Y+1 <= initializedBoard->getX();
 }
 
 
