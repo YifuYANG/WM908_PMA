@@ -8,6 +8,7 @@ class Animal {
 protected:
     int MP;
     int X, Y;
+    int index;
 private:
 
     bool whether_this_animal_has_moved_or_not;
@@ -18,6 +19,8 @@ private:
 
     double probability_generator_for_moving();
 
+    Direction rand_direction_generator();
+
 public:
     bool isWhetherThisAnimalHasMovedOrNot();
 
@@ -25,9 +28,9 @@ public:
 
     int getMp();
 
-    Direction move();
+    void move();
 
-    Animal(int x, int y);
+    Animal(int x, int y, int index);
 
     int getX() const;
 
@@ -36,6 +39,8 @@ public:
     void setX(int x);
 
     void setY(int y);
+
+    int getIndex() const;
 };
 
 

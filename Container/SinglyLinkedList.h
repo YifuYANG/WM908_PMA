@@ -20,6 +20,8 @@ public:
     void printList();
 
     void ReplaceByData(Animal* oldData, Animal* newData);
+
+    Node* getByIndex(int index);
 };
 
 

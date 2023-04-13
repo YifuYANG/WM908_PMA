@@ -6,7 +6,11 @@ using namespace std;
 class Map {
 private :
     SinglyLinkedList list;
+
     int x=0,y=0;
+
+    int index=1;
+
     //block (#), vegetation (T), herbivore (H), carnivore (C), omnivore (O), hunter (R)
     const string DISPLAY [7] = {"   "," # "," T ", " H "," C "," O ", " R "};
 
@@ -19,6 +23,7 @@ private :
 public:
 
     int **board;
+
 
     Map(int x, int y);
 
@@ -34,7 +39,7 @@ public:
 
     int getY() const;
 
-    const SinglyLinkedList &getList() const;
+    SinglyLinkedList &getList();
 };
 
 

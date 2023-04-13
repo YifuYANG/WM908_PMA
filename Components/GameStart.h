@@ -5,10 +5,10 @@
 class GameStart {
 private:
     Map* initializedBoard = nullptr;
-    int random_direction_generator();
-    bool check_collision(int X, int Y);
-    bool check_boundary(int X, int Y);
+
     int random_number_generator(int range);
+
+    void board_refresher();
 public:
     GameStart();
 

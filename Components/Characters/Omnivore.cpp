@@ -8,6 +8,6 @@ Omnivore::Omnivore() {
     MP = 8;
 }
 
-Omnivore::Omnivore(int x, int y) : Animal(x, y) {
+Omnivore::Omnivore(int x, int y,int index) : Animal(x, y, index) {
     MP = 8;
 }

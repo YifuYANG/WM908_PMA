@@ -8,8 +8,6 @@ Carnivore::Carnivore() {
     MP = 5;
 }
 
-Carnivore::Carnivore(int x, int y) : Animal(x, y) {
+Carnivore::Carnivore(int x, int y,int index) : Animal(x, y,index) {
     MP = 5;
-    this->X=x;
-    this->Y=y;
 }

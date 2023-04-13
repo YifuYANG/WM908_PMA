@@ -6,7 +6,7 @@ class Herbivore : public Animal{
 public:
     Herbivore();
 
-    Herbivore(int x, int y);
+    Herbivore(int x, int y,int index);
 };
 
 

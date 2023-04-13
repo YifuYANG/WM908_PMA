@@ -115,24 +115,24 @@ void Map::store_animals_to_container(int input_x, int input_y, int character) {
     Animal* animal;
     switch (character) {
         case 2:
-            animal = new Vegetation(input_x, input_y);
+            animal = new Vegetation(input_x, input_y, index);
             break;
         case 3:
-            animal = new Herbivore(input_x, input_y);
+            animal = new Herbivore(input_x, input_y, index);
             break;
         case 4:
-            animal = new Carnivore(input_x, input_y);
+            animal = new Carnivore(input_x, input_y, index);
             break;
         case 5:
-            animal = new Omnivore(input_x, input_y);
+            animal = new Omnivore(input_x, input_y, index);
             break;
         default:
             return;
     }
     list.Insert(animal);
+    index++;
 }
 
-const SinglyLinkedList &Map::getList() const {
+SinglyLinkedList &Map::getList() {
     return list;
 }
-

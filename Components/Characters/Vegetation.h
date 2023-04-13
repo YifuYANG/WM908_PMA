@@ -7,7 +7,7 @@ public:
     Vegetation();
     static Direction move();
 
-    Vegetation(int x, int y);
+    Vegetation(int x, int y, int index);
 };
 
 

@@ -8,7 +8,7 @@ class Carnivore : public Animal{
 public:
     Carnivore();
 
-    Carnivore(int x,int y);
+    Carnivore(int x,int y, int index);
 };
 
 

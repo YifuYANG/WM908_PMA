@@ -1,7 +1,3 @@
-//
-// Created by Yifu Yang on 13/04/2023.
-//
-
 #include "SinglyLinkedList.h"
 
 SinglyLinkedList::SinglyLinkedList() {
@@ -72,8 +68,25 @@ void SinglyLinkedList::printList() {
     }
 
     while (temp != nullptr) {
-        cout << temp->getData()->getX()+1 << " " << temp->getData()->getY()+1 <<endl;
+        cout <<"Index -> "<< temp->getData()->getIndex()<<" holds ->";
+        cout << temp->getData()->getX()+1 << " X " << temp->getData()->getY()+1 <<endl;
         temp = temp->getNext();
+    }
+}
+
+Node *SinglyLinkedList::getByIndex(int index) {
+    Node* temp = head;
+    if (head == nullptr) {
+        cout << "List empty" << endl;
+    }
+    int i=0;
+    while (i<size){
+        if(temp->getData()->getIndex()==index){
+            return temp;
+        } else {
+            temp=temp->getNext();
+            i++;
+        }
     }
 }
 

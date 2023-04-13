@@ -2,7 +2,7 @@
 #include <random>
 using namespace std;
 
-Direction Animal::move() {
+Direction Animal::rand_direction_generator() {
     double distribution = rand_double_generator();
     if(distribution >=0 && distribution <= probability_generator_for_moving()){//0 -0.16
         return Direction::North;
@@ -44,9 +44,10 @@ int Animal::getMp(){
     return MP;
 }
 
-Animal::Animal(int x, int y) {
-    this->X=x;
-    this->Y=y;
+Animal::Animal(int x, int y, int index) {
+    this->X = x;
+    this->Y = y;
+    this->index = index;
 }
 
 int Animal::getX() const {
@@ -63,4 +64,21 @@ void Animal::setX(int x) {
 
 void Animal::setY(int y) {
     Y = y;
+}
+
+void Animal::move() {
+    Direction drection=rand_direction_generator();
+    if((int)drection == 0){
+        X = X - 1;
+    } else if ((int)drection == 1){
+        X = X + 1;
+    } else if ((int)drection == 2){
+        Y = Y + 1;
+    } else if ((int)drection == 3){
+        Y = Y - 1;
+    }
+}
+
+int Animal::getIndex() const {
+    return index;
 }
