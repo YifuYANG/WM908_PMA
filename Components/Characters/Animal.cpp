@@ -1,32 +1,45 @@
 #include "Animal.h"
-#include "iostream"
+#include <random>
 using namespace std;
-void Animal::move() {
-    int MP = movement_parameter_generator();
-    if(MP == 0){
-        Y = Y + 1;
-    } else if (MP == 1){
-        Y = Y - 1;
-    } else if (MP == 2){
-        X = X + 1;
-    } else if (MP == 3){
-        X =X - 1;
+
+Direction Animal::move() {
+    double distribution = rand_double_generator();
+    if(distribution >=0 && distribution <= probability_generator_for_moving()){//0 -0.16
+        return Direction::North;
+    } else if (distribution >= probability_generator_for_moving() && distribution <= probability_generator_for_moving()*2){
+        return Direction::South;
+    } else if (distribution >= probability_generator_for_moving()*2 && distribution <= probability_generator_for_moving()*3){
+        return Direction::West;
+    } else if (distribution >= probability_generator_for_moving()*3 && distribution <= probability_generator_for_moving()*4){
+        return Direction::East;
+    } else {
+        return Direction::Not_Moving;
     }
 }
 
-Animal::Animal(int X, int Y) {
-    this->X = X;
-    this->Y = Y;
-}
-
-int Animal::movement_parameter_generator() {
-    return rand() % 5;
-}
-
-bool Animal::check_boundary(int x, int y, int boundary_X, int boundary_Y) {
-    return X+1 <= boundary_Y && Y+1 <= boundary_X;
+double Animal::rand_double_generator() {
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<double> dis(0, 1);
+    return dis(gen);
 }
 
 Animal::Animal() {
     whether_this_animal_has_moved_or_not=false;
+}
+
+double Animal::probability_generator_for_not_moving() {
+    return ((double)MP-4)/(double)MP;
+}
+
+double Animal::probability_generator_for_moving() {
+    return (1-probability_generator_for_not_moving())/4;
+}
+
+bool Animal::isWhetherThisAnimalHasMovedOrNot(){
+    return whether_this_animal_has_moved_or_not;
+}
+
+int Animal::getMp(){
+    return MP;
 }

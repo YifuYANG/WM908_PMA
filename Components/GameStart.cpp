@@ -53,12 +53,12 @@ GameStart & GameStart::move_oneRound() {
     return *this;
 }
 
+//case: position is not empty, wouldn't generate 15 c
 GameStart & GameStart::place_random_characters_at_random_locations_on_the_board() {
     for(int i=0;i<15; i++){
         int rand_X=random_number_generator(initializedBoard->getY());
         int rand_Y=random_number_generator(initializedBoard->getX());
         initializedBoard->placeAt(rand_X,rand_Y,rand() % 6+1);
-        Animal animal(rand_X,rand_Y);
     }
     return *this;
 }

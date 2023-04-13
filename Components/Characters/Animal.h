@@ -1,22 +1,31 @@
 #ifndef PMA_ANIMAL_H
 #define PMA_ANIMAL_H
 #include "iostream"
+#include "../Enum/Direction.h"
+
 using namespace std;
 class Animal {
+protected:
+    int MP;
+
 private:
-    int X,Y;
+
     bool whether_this_animal_has_moved_or_not;
 
-    int movement_parameter_generator();
+    double rand_double_generator();
 
-    bool check_boundary(int X, int Y,int boundary_X, int boundary_Y);
+    double probability_generator_for_not_moving();
+
+    double probability_generator_for_moving();
 
 public:
-    Animal(int X, int Y);
+    bool isWhetherThisAnimalHasMovedOrNot();
 
     Animal();
 
-    void move();
+    int getMp();
+
+    Direction move();
 };
 
 

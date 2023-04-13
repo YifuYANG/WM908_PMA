@@ -20,7 +20,6 @@ public:
 
     GameStart & move_oneRound();
 
-
 };
 
 

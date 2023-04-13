@@ -1,13 +1,11 @@
-//
-// Created by Yifu Yang on 12/04/2023.
-//
-
 #ifndef PMA_VEGETATION_H
 #define PMA_VEGETATION_H
+#include "Animal.h"
 
-
-class Vegetation {
-
+class Vegetation : public Animal {
+public:
+    Vegetation();
+    static Direction move();
 };
 
 

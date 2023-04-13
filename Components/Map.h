@@ -16,7 +16,7 @@ public:
     Map(int x, int y);
     ~Map();
     void display();
-    void placeAt(int input_X, int input_Y, int character);
+    bool placeAt(int input_X, int input_Y, int character);
     string getXY(int input_X,int input_Y);
     int getX() const;
     int getY() const;

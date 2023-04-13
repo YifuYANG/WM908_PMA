@@ -61,11 +61,13 @@ void Map::display() {
  * input integer presents the role which is being placed,
  * character number-> {[0]: empty, [1] #, [2]: T, [3]: H, [4]: C, [5]: O, [6]: R}.
  * */
-void Map::placeAt(int input_X, int input_Y, int character) {
+bool Map::placeAt(int input_X, int input_Y, int character) {
     if(!check_boundary(input_X+1,input_Y+1)){
         cout << "Error!! Input: [" << input_X+1<<" X " <<input_Y+1<<"] is out of bound!!" << endl;
+        return false;
     } else if(!check_collision(input_X,input_Y)){
         cout << "Error!! Coordinate at: [" << input_X+1<<" X " <<input_Y+1<<"] is not empty!!" << endl;
+        return false;
     } else {
         board[input_X][input_Y] = character;
         if(std::equal(DISPLAY[character].begin(), DISPLAY[character].end()," # ")){
@@ -73,6 +75,7 @@ void Map::placeAt(int input_X, int input_Y, int character) {
         } else {
             cout << "==> Placing character [" <<DISPLAY[character]<<"] to coordinate [" << input_X+1<<" X " <<input_Y+1<<"]" << endl;
         }
+        return true;
     }
 }
 
