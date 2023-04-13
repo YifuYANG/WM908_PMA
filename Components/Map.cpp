@@ -2,6 +2,11 @@
 #include "Map.h"
 #include <random>
 #include <iomanip>
+#include "Characters/Vegetation.h"
+#include "Characters/Herbivore.h"
+#include "Characters/Carnivore.h"
+#include "Characters/Omnivore.h"
+
 
 using namespace std;
 /* initial constructor which generates a 2D array with given size,
@@ -70,6 +75,7 @@ bool Map::placeAt(int input_X, int input_Y, int character) {
         return false;
     } else {
         board[input_X][input_Y] = character;
+        store_animals_to_container(input_X,input_Y,character);
         if(std::equal(DISPLAY[character].begin(), DISPLAY[character].end()," # ")){
             cout << "==> Placing block [" <<DISPLAY[character]<<"] to coordinate [" << input_X+1<<" X " <<input_Y+1<<"]" << endl;
         } else {
@@ -104,3 +110,29 @@ int Map::getX() const {
 int Map::getY() const {
     return y;
 }
+
+void Map::store_animals_to_container(int input_x, int input_y, int character) {
+    Animal* animal;
+    switch (character) {
+        case 2:
+            animal = new Vegetation(input_x, input_y);
+            break;
+        case 3:
+            animal = new Herbivore(input_x, input_y);
+            break;
+        case 4:
+            animal = new Carnivore(input_x, input_y);
+            break;
+        case 5:
+            animal = new Omnivore(input_x, input_y);
+            break;
+        default:
+            return;
+    }
+    list.Insert(animal);
+}
+
+const SinglyLinkedList &Map::getList() const {
+    return list;
+}
+

@@ -7,3 +7,9 @@
 Carnivore::Carnivore() {
     MP = 5;
 }
+
+Carnivore::Carnivore(int x, int y) : Animal(x, y) {
+    MP = 5;
+    this->X=x;
+    this->Y=y;
+}

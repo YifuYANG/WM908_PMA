@@ -5,6 +5,8 @@
 class Herbivore : public Animal{
 public:
     Herbivore();
+
+    Herbivore(int x, int y);
 };
 
 

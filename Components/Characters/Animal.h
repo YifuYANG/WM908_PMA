@@ -7,7 +7,7 @@ using namespace std;
 class Animal {
 protected:
     int MP;
-
+    int X, Y;
 private:
 
     bool whether_this_animal_has_moved_or_not;
@@ -26,6 +26,16 @@ public:
     int getMp();
 
     Direction move();
+
+    Animal(int x, int y);
+
+    int getX() const;
+
+    int getY() const;
+
+    void setX(int x);
+
+    void setY(int y);
 };
 
 

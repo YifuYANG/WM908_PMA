@@ -58,7 +58,7 @@ GameStart & GameStart::place_random_characters_at_random_locations_on_the_board(
     for(int i=0;i<15; i++){
         int rand_X=random_number_generator(initializedBoard->getY());
         int rand_Y=random_number_generator(initializedBoard->getX());
-        initializedBoard->placeAt(rand_X,rand_Y,rand() % 6+1);
+        initializedBoard->placeAt(rand_X,rand_Y,rand() % 5+1);
     }
     return *this;
 }
@@ -80,5 +80,11 @@ bool GameStart::check_boundary(int X, int Y) {
 int GameStart::random_number_generator(int range) {
     return rand() % range;
 }
+
+void GameStart::printList() {
+    SinglyLinkedList list=this->initializedBoard->getList();
+    list.printList();
+}
+
 
 

@@ -6,6 +6,8 @@ class Vegetation : public Animal {
 public:
     Vegetation();
     static Direction move();
+
+    Vegetation(int x, int y);
 };
 
 

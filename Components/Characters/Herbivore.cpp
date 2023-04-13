@@ -7,3 +7,7 @@
 Herbivore::Herbivore() {
     MP = 5;
 }
+
+Herbivore::Herbivore(int x, int y) : Animal(x, y) {
+    MP = 5;
+}

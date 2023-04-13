@@ -20,6 +20,8 @@ public:
 
     GameStart & move_oneRound();
 
+    void printList();
+
 };
 
 

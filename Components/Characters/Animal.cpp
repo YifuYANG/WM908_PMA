@@ -43,3 +43,24 @@ bool Animal::isWhetherThisAnimalHasMovedOrNot(){
 int Animal::getMp(){
     return MP;
 }
+
+Animal::Animal(int x, int y) {
+    this->X=x;
+    this->Y=y;
+}
+
+int Animal::getX() const {
+    return X;
+}
+
+int Animal::getY() const {
+    return Y;
+}
+
+void Animal::setX(int x) {
+    X = x;
+}
+
+void Animal::setY(int y) {
+    Y = y;
+}
