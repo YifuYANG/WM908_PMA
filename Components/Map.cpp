@@ -98,7 +98,7 @@ string Map::getXY(int input_X,int input_Y) {
 
 // helper function for placeAt & rand_place, which checks for collision.
 bool Map::check_collision(int input_X,int input_Y) {
-    return board[input_X][input_Y]==0;
+    return input_X > 0 && input_Y > 0 && board[input_X][input_Y] == 0;
 }
 
 //helper function for placeAt & rand_place, which checks for boundary.
