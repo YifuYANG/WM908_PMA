@@ -7,6 +7,8 @@ public:
     Herbivore();
 
     Herbivore(int x, int y,int index);
+
+    Herbivore(int x, int y);
 };
 
 

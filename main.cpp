@@ -10,9 +10,11 @@ int main() {
     GameStart gameStart;
     gameStart.InitializeBoard().
     place_random_characters_at_random_locations_on_the_board().
+    display().
+    move_oneRound().
     display();
 
-    gameStart.printList();
+    //gameStart.printList();
 //    SinglyLinkedList list;
 //    for(int i=0;i<5;i++){
 //        list.Insert(new Animal (i,i+2,i+1));

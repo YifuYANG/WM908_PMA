@@ -19,7 +19,7 @@ private :
 
     bool check_boundary(int input_X, int input_Y);
 
-    void store_animals_to_container(int input_x, int input_y,int character);
+    void store_animals_to_container(Animal animal);
 public:
 
     int **board;
@@ -31,7 +31,7 @@ public:
 
     void display();
 
-    bool placeAt(int input_X, int input_Y, int character);
+    bool placeAt(Animal animal);
 
     string getXY(int input_X,int input_Y);
 

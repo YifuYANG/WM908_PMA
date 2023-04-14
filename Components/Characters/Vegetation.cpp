@@ -1,4 +1,5 @@
 #include "Vegetation.h"
+#include "../Enum/Characters.h"
 
 Vegetation::Vegetation() {
     MP = 0;
@@ -9,5 +10,11 @@ Direction Vegetation::move() {
 }
 
 Vegetation::Vegetation(int x, int y, int index) : Animal(x, y,index) {
+    character = (int) Characters::Vegetation;
+    MP = 0;
+}
+
+Vegetation::Vegetation(int x, int y) : Animal(x, y) {
+    character = (int) Characters::Vegetation;
     MP = 0;
 }

@@ -50,21 +50,14 @@ Animal::Animal(int x, int y, int index) {
     this->index = index;
 }
 
-int Animal::getX() const {
+int Animal::getX() {
     return X;
 }
 
-int Animal::getY() const {
+int Animal::getY() {
     return Y;
 }
 
-void Animal::setX(int x) {
-    X = x;
-}
-
-void Animal::setY(int y) {
-    Y = y;
-}
 
 void Animal::move() {
     Direction drection=rand_direction_generator();
@@ -79,6 +72,23 @@ void Animal::move() {
     }
 }
 
-int Animal::getIndex() const {
+int Animal::getIndex() {
     return index;
+}
+
+int Animal::getCharacter() {
+    return character;
+}
+
+void Animal::setWhetherThisAnimalHasMovedOrNot(bool whetherThisAnimalHasMovedOrNot) {
+    whether_this_animal_has_moved_or_not = whetherThisAnimalHasMovedOrNot;
+}
+
+void Animal::setIndex(int index) {
+    Animal::index = index;
+}
+
+Animal::Animal(int x, int y){
+    this->X = x;
+    this->Y = y;
 }

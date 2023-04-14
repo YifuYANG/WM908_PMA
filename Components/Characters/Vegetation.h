@@ -8,6 +8,8 @@ public:
     static Direction move();
 
     Vegetation(int x, int y, int index);
+
+    Vegetation(int x, int y);
 };
 
 

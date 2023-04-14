@@ -9,6 +9,7 @@ protected:
     int MP;
     int X, Y;
     int index;
+    int character;
 private:
 
     bool whether_this_animal_has_moved_or_not;
@@ -32,15 +33,19 @@ public:
 
     Animal(int x, int y, int index);
 
-    int getX() const;
+    int getX();
 
-    int getY() const;
+    int getY();
 
-    void setX(int x);
+    int getIndex();
 
-    void setY(int y);
+    int getCharacter();
 
-    int getIndex() const;
+    void setWhetherThisAnimalHasMovedOrNot(bool whetherThisAnimalHasMovedOrNot);
+
+    void setIndex(int index);
+
+    Animal(int x, int y);
 };
 
 

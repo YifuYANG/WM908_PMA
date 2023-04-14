@@ -66,20 +66,23 @@ void Map::display() {
  * input integer presents the role which is being placed,
  * character number-> {[0]: empty, [1] #, [2]: T, [3]: H, [4]: C, [5]: O, [6]: R}.
  * */
-bool Map::placeAt(int input_X, int input_Y, int character) {
-    if(!check_boundary(input_X+1,input_Y+1)){
-        cout << "Error!! Input: [" << input_X+1<<" X " <<input_Y+1<<"] is out of bound!!" << endl;
+bool Map::placeAt(Animal animal) {
+    int X=animal.getX();
+    int Y=animal.getY();
+    int Character = animal.getCharacter();
+    if(!check_boundary(X+1,Y+1)){
+        cout << "Error!! Input: [" << X+1<<" X " <<Y+1<<"] is out of bound!!" << endl;
         return false;
-    } else if(!check_collision(input_X,input_Y)){
-        cout << "Error!! Coordinate at: [" << input_X+1<<" X " <<input_Y+1<<"] is not empty!!" << endl;
+    } else if(!check_collision(X,Y)){
+        cout << "Error!! Coordinate at: [" << X+1<<" X " <<Y+1<<"] is not empty!!" << endl;
         return false;
     } else {
-        board[input_X][input_Y] = character;
-        store_animals_to_container(input_X,input_Y,character);
-        if(std::equal(DISPLAY[character].begin(), DISPLAY[character].end()," # ")){
-            cout << "==> Placing block [" <<DISPLAY[character]<<"] to coordinate [" << input_X+1<<" X " <<input_Y+1<<"]" << endl;
+        board[X][Y] = Character;
+        store_animals_to_container(animal);
+        if (DISPLAY[Character] == " # ") {
+            cout << "==> Placing block [" << DISPLAY[Character] << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
         } else {
-            cout << "==> Placing character [" <<DISPLAY[character]<<"] to coordinate [" << input_X+1<<" X " <<input_Y+1<<"]" << endl;
+            cout << "==> Placing character [" << DISPLAY[Character] << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
         }
         return true;
     }
@@ -100,7 +103,7 @@ bool Map::check_collision(int input_X,int input_Y) {
 
 //helper function for placeAt & rand_place, which checks for boundary.
 bool Map::check_boundary(int input_X, int input_Y) {
-    return input_X <= y && input_Y <= x;
+    return input_X >= 0 && input_Y >= 0 && input_X <= y && input_Y <= x;
 }
 
 int Map::getX() const {
@@ -111,26 +114,32 @@ int Map::getY() const {
     return y;
 }
 
-void Map::store_animals_to_container(int input_x, int input_y, int character) {
-    Animal* animal;
-    switch (character) {
+void Map::store_animals_to_container(Animal animal) {
+    Animal* newanimal;
+    switch (animal.getCharacter()) {
         case 2:
-            animal = new Vegetation(input_x, input_y, index);
+            newanimal = new Vegetation(animal.getX(), animal.getY(), index);
             break;
         case 3:
-            animal = new Herbivore(input_x, input_y, index);
+            newanimal = new Herbivore(animal.getX(), animal.getY(), index);
             break;
         case 4:
-            animal = new Carnivore(input_x, input_y, index);
+            newanimal = new Carnivore(animal.getX(), animal.getY(), index);
             break;
         case 5:
-            animal = new Omnivore(input_x, input_y, index);
+            newanimal = new Omnivore(animal.getX(), animal.getY(), index);
             break;
         default:
             return;
     }
-    list.Insert(animal);
-    index++;
+
+    if(list.checkByIndex(animal.getIndex())){
+        newanimal->setIndex(animal.getIndex());
+        list.ReplaceByIndex(animal.getIndex(),newanimal);
+    } else {
+        list.Insert(newanimal);
+        index++;
+    }
 }
 
 SinglyLinkedList &Map::getList() {

@@ -44,21 +44,18 @@ void SinglyLinkedList::DeleteByData(Animal* data) {
     }
 }
 
-void SinglyLinkedList::ReplaceByData(Animal* oldData, Animal* newData) {
-    if (head == nullptr) {
-        cout << "List empty." << endl;
-        return;
-    }
+void SinglyLinkedList::ReplaceByIndex(int index, Animal* data) {
     Node* temp = head;
     while (temp != nullptr) {
-        if (temp->getData() == oldData) {
-            temp->setData(newData);
+        if (temp->getData()->getIndex() == index) {
+            temp->setData(data);
             return;
         }
         temp = temp->getNext();
     }
-    cout << "Data not found." << endl;
+    cout << "Data not found" << endl;
 }
+
 
 void SinglyLinkedList::printList() {
     Node* temp = head;
@@ -76,17 +73,24 @@ void SinglyLinkedList::printList() {
 
 Node *SinglyLinkedList::getByIndex(int index) {
     Node* temp = head;
-    if (head == nullptr) {
-        cout << "List empty" << endl;
-    }
-    int i=0;
-    while (i<size){
-        if(temp->getData()->getIndex()==index){
+    while (temp != nullptr) {
+        if (temp->getData()->getIndex() == index) {
             return temp;
-        } else {
-            temp=temp->getNext();
-            i++;
         }
+        temp = temp->getNext();
     }
+    cout << "Index not found" << endl;
+    return nullptr;
 }
 
+bool SinglyLinkedList::checkByIndex(int index) {
+    Node* temp = head;
+    while (temp != nullptr) {
+        if (temp->getData()->getIndex() == index) {
+            return true;
+        }
+        temp = temp->getNext();
+    }
+    //cout << "Index not found" << endl;
+    return false;
+}

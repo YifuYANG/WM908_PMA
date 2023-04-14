@@ -9,6 +9,8 @@ public:
     Carnivore();
 
     Carnivore(int x,int y, int index);
+
+    Carnivore(int x, int y);
 };
 
 

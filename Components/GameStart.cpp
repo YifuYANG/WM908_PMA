@@ -1,4 +1,6 @@
 #include "GameStart.h"
+#include "Characters/Carnivore.h"
+
 GameStart::GameStart() = default;
 
 
@@ -16,20 +18,33 @@ GameStart &GameStart::display() {
 }
 
 GameStart & GameStart::move_oneRound() {
+    ///*************////
+
     board_refresher();
     for(int i=1;i<=initializedBoard->getList().GetSize();i++){
-        initializedBoard->getList().getByIndex(i)->getData();
-
+        Animal animal = *initializedBoard->getList().getByIndex(i)->getData();
+        animal.move();
+        initializedBoard->placeAt(animal);
+//        if(!animal.isWhetherThisAnimalHasMovedOrNot()){
+//            animal.move();
+//            animal.setWhetherThisAnimalHasMovedOrNot(true);
+////            do{
+////                animal.move();
+////            } while(!initializedBoard->placeAt(animal));
+//            initializedBoard->placeAt(animal);
+//        }
     }
     return *this;
 }
 
 
 GameStart & GameStart::place_random_characters_at_random_locations_on_the_board() {
-    for(int i=0;i<15; i++){
+
+    ///*************////
+    for(int i=0;i<3; i++){
         int rand_X=random_number_generator(initializedBoard->getY());
         int rand_Y=random_number_generator(initializedBoard->getX());
-        initializedBoard->placeAt(rand_X,rand_Y,rand() % 5+1);
+        initializedBoard->placeAt(*new Carnivore(rand_X,rand_Y));
     }
     return *this;
 }

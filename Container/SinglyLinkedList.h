@@ -19,9 +19,11 @@ public:
 
     void printList();
 
-    void ReplaceByData(Animal* oldData, Animal* newData);
+    void ReplaceByIndex(int index, Animal* newData);
 
     Node* getByIndex(int index);
+
+    bool checkByIndex(int index);
 };
 
 
