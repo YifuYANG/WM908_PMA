@@ -46,6 +46,10 @@ public:
     void setIndex(int index);
 
     Animal(int x, int y);
+
+    void setX(int x);
+
+    void setY(int y);
 };
 
 

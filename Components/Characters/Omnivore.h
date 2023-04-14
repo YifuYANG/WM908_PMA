@@ -1,6 +1,6 @@
 #ifndef PMA_OMNIVORE_H
 #define PMA_OMNIVORE_H
-
+#include "../Enum/Characters.h"
 
 #include "Animal.h"
 

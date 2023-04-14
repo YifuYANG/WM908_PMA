@@ -4,7 +4,7 @@ using namespace std;
 
 Direction Animal::rand_direction_generator() {
     double distribution = rand_double_generator();
-    if(distribution >=0 && distribution <= probability_generator_for_moving()){//0 -0.16
+    if(distribution >=0 && distribution <= probability_generator_for_moving()){
         return Direction::North;
     } else if (distribution >= probability_generator_for_moving() && distribution <= probability_generator_for_moving()*2){
         return Direction::South;
@@ -91,4 +91,12 @@ void Animal::setIndex(int index) {
 Animal::Animal(int x, int y){
     this->X = x;
     this->Y = y;
+}
+
+void Animal::setX(int x) {
+    X = x;
+}
+
+void Animal::setY(int y) {
+    Y = y;
 }

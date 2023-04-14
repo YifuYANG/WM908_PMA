@@ -1,5 +1,5 @@
 #include "GameStart.h"
-#include "Characters/Carnivore.h"
+
 
 GameStart::GameStart() = default;
 
@@ -17,26 +17,30 @@ GameStart &GameStart::display() {
     return *this;
 }
 
-GameStart & GameStart::move_oneRound() {
+GameStart& GameStart::move_oneRound() {
     board_refresher();
-    for(int i=1;i<=initializedBoard->getList().GetSize();i++){
-        Animal animal = *initializedBoard->getList().getByIndex(i)->getData();
-        if(!animal.isWhetherThisAnimalHasMovedOrNot()){
-            cout<<"Before => "<<"X: "<<animal.getX()<<" "<<"Y: "<<animal.getY()<<endl;
-//            do {
-//
-//            }
-            animal.move();
-            cout<<"After => "<<"X: "<<animal.getX()<<" "<<"Y: "<<animal.getY()<<endl;
-            initializedBoard->placeAt(animal);
+    for (int i = 1; i <= initializedBoard->getList().GetSize(); i++) {
+        Animal& animal = *initializedBoard->getList().getByIndex(i)->getData();
+        int x = animal.getX();
+        int y = animal.getY();
+        if (!animal.isWhetherThisAnimalHasMovedOrNot()) {
+            while (true) {
+                cout<<"Old X: "<<x<<" Old Y: "<<y<<endl;
+                animal.move();
+                cout<<"New X: "<<animal.getX()<<" New Y: "<<animal.getY()<<endl;
+                if (initializedBoard->placeAt(animal)) {
+                    break;
+                }
+                animal.setX(x);
+                animal.setY(y);
+            }
         }
     }
     return *this;
 }
 
-
 GameStart & GameStart::place_random_characters_at_random_locations_on_the_board() {
-    for(int i=0;i<10; i++){
+    for(int i=0;i<20; i++){
         int rand_X;
         int rand_Y;
         do{

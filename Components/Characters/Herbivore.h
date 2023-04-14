@@ -1,6 +1,7 @@
 #ifndef PMA_HERBIVORE_H
 #define PMA_HERBIVORE_H
 #include "Animal.h"
+#include "../Enum/Characters.h"
 
 class Herbivore : public Animal{
 public:

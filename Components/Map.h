@@ -2,6 +2,12 @@
 #define PMA_MAP_H
 #include "iostream"
 #include "../Container/SinglyLinkedList.h"
+#include <random>
+#include <iomanip>
+#include "Characters/Vegetation.h"
+#include "Characters/Herbivore.h"
+#include "Characters/Carnivore.h"
+#include "Characters/Omnivore.h"
 using namespace std;
 class Map {
 private :

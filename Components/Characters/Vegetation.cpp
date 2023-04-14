@@ -1,5 +1,4 @@
 #include "Vegetation.h"
-#include "../Enum/Characters.h"
 
 Vegetation::Vegetation() {
     MP = 0;

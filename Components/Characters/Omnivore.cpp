@@ -1,9 +1,5 @@
-//
-// Created by Yifu Yang on 13/04/2023.
-//
-
 #include "Omnivore.h"
-#include "../Enum/Characters.h"
+
 
 Omnivore::Omnivore() {
     MP = 8;

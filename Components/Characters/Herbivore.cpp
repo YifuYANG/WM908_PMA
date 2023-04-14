@@ -1,5 +1,5 @@
 #include "Herbivore.h"
-#include "../Enum/Characters.h"
+
 
 Herbivore::Herbivore() {
     MP = 5;

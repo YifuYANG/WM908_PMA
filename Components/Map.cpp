@@ -1,12 +1,4 @@
-#include <iostream>
 #include "Map.h"
-#include <random>
-#include <iomanip>
-#include "Characters/Vegetation.h"
-#include "Characters/Herbivore.h"
-#include "Characters/Carnivore.h"
-#include "Characters/Omnivore.h"
-
 
 using namespace std;
 /* initial constructor which generates a 2D array with given size,
@@ -70,9 +62,9 @@ bool Map::placeAt(Animal animal) {
     int X=animal.getX();
     int Y=animal.getY();
     int Character = animal.getCharacter();
-    if(!check_boundary(X+1,Y+1)){
+    if(!check_boundary(X,Y)){
         return false;
-    } else if(!check_collision(X,Y)){
+    } else if(!check_collision(X,Y) && !list.checkByIndex(animal.getIndex())){
         return false;
     } else {
         store_animals_to_container(animal);
@@ -96,12 +88,12 @@ string Map::getXY(int input_X,int input_Y) {
 
 // helper function for placeAt & rand_place, which checks for collision.
 bool Map::check_collision(int input_X,int input_Y) {
-    return input_X >= 0 && input_Y >= 0 && board[input_X][input_Y] == 0;
+    return board[input_X][input_Y] == 0;
 }
 
 //helper function for placeAt & rand_place, which checks for boundary.
 bool Map::check_boundary(int input_X, int input_Y) {
-    return input_X >= 0 && input_Y >= 0 && input_X <= y && input_Y <= x;
+    return input_X >= 0 && input_Y >= 0 && input_X <= y-1 && input_Y <= x-1;
 }
 
 int Map::getX() const {

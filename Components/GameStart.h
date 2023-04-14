@@ -1,6 +1,8 @@
 #ifndef PMA_GAMESTART_H
 #define PMA_GAMESTART_H
 #include "Map.h"
+#include "Characters/Carnivore.h"
+
 
 class GameStart {
 private:

@@ -1,6 +1,7 @@
 #ifndef PMA_VEGETATION_H
 #define PMA_VEGETATION_H
 #include "Animal.h"
+#include "../Enum/Characters.h"
 
 class Vegetation : public Animal {
 public:
