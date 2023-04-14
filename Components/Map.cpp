@@ -71,14 +71,12 @@ bool Map::placeAt(Animal animal) {
     int Y=animal.getY();
     int Character = animal.getCharacter();
     if(!check_boundary(X+1,Y+1)){
-        cout << "Error!! Input: [" << X+1<<" X " <<Y+1<<"] is out of bound!!" << endl;
         return false;
     } else if(!check_collision(X,Y)){
-        cout << "Error!! Coordinate at: [" << X+1<<" X " <<Y+1<<"] is not empty!!" << endl;
         return false;
     } else {
-        board[X][Y] = Character;
         store_animals_to_container(animal);
+        board[X][Y] = Character;
         if (DISPLAY[Character] == " # ") {
             cout << "==> Placing block [" << DISPLAY[Character] << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
         } else {
@@ -98,7 +96,7 @@ string Map::getXY(int input_X,int input_Y) {
 
 // helper function for placeAt & rand_place, which checks for collision.
 bool Map::check_collision(int input_X,int input_Y) {
-    return input_X > 0 && input_Y > 0 && board[input_X][input_Y] == 0;
+    return input_X >= 0 && input_Y >= 0 && board[input_X][input_Y] == 0;
 }
 
 //helper function for placeAt & rand_place, which checks for boundary.
@@ -135,6 +133,7 @@ void Map::store_animals_to_container(Animal animal) {
 
     if(list.checkByIndex(animal.getIndex())){
         newanimal->setIndex(animal.getIndex());
+        newanimal->setWhetherThisAnimalHasMovedOrNot(true);
         list.ReplaceByIndex(animal.getIndex(),newanimal);
     } else {
         list.Insert(newanimal);

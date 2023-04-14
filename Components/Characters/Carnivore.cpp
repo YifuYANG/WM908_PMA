@@ -1,7 +1,3 @@
-//
-// Created by Yifu Yang on 13/04/2023.
-//
-
 #include "Carnivore.h"
 #include "../Enum/Characters.h"
 
