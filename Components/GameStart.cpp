@@ -10,10 +10,11 @@ GameStart &GameStart::InitializeBoard() {
 }
 
 GameStart &GameStart::display() {
+    //display map
     if(this->initializedBoard != nullptr) {
         this->initializedBoard->display();
     }
-    //counter display
+    //display counter
     return *this;
 }
 
@@ -22,17 +23,11 @@ GameStart& GameStart::move_oneRound() {
         Animal& animal = *initializedBoard->getList().getByIndex(i)->getData();
         int x = animal.getX();
         int y = animal.getY();
+        animal.move();
         if (!animal.isWhetherThisAnimalHasMovedOrNot()) {
-            while (true) {
-                //cout<<"Old X: "<<x<<" Old Y: "<<y<<endl;
-                animal.move();
-                //cout<<"New X: "<<animal.getX()<<" New Y: "<<animal.getY()<<endl;
-                if (initializedBoard->placeAt(animal)) {
-                    if(!animal.check_for_same_position()){
-                        initializedBoard->board[x][y]=0;
-                    }
-                    break;
-                }
+            if (initializedBoard->placeAt(animal)) {
+                initializedBoard->board[x][y]=0;
+            } else {
                 animal.setX(x);
                 animal.setY(y);
             }
@@ -44,24 +39,14 @@ GameStart& GameStart::move_oneRound() {
 }
 
 GameStart & GameStart::place_random_characters_at_random_locations_on_the_board() {
-    for(int i=0;i<20; i++){
+    for(int i=0;i<12; i++){
         int rand_X;
         int rand_Y;
         do{
             rand_X = random_number_generator(initializedBoard->getY());
             rand_Y = random_number_generator(initializedBoard->getX());
-        } while(!initializedBoard->placeAt(*new Carnivore(rand_X,rand_Y)));
-
+        } while(!initializedBoard->placeAt(random_character_generator(rand_X,rand_Y)));
     }
-//    initializedBoard->placeAt(*new Carnivore(0,0));
-//    initializedBoard->placeAt(*new Carnivore(0,1));
-//    initializedBoard->placeAt(*new Carnivore(0,2));
-//    initializedBoard->placeAt(*new Carnivore(1,0));
-//    initializedBoard->placeAt(*new Carnivore(1,1));
-//    initializedBoard->placeAt(*new Carnivore(1,2));
-//    initializedBoard->placeAt(*new Carnivore(2,0));
-//    initializedBoard->placeAt(*new Carnivore(2,1));
-//    initializedBoard->placeAt(*new Carnivore(2,2));
     return *this;
 }
 
@@ -79,6 +64,22 @@ void GameStart::set_all_animal_to_has_not_moved() {
     SinglyLinkedList list=this->initializedBoard->getList();
     for(int i=1;i<list.GetSize();i++){
         list.getByIndex(i)->getData()->setWhetherThisAnimalHasMovedOrNot(false);
+    }
+}
+
+Animal& GameStart::random_character_generator(int in_x, int in_y) {
+    int random_number = random_number_generator(4)+2;
+    switch (random_number) {
+        case 2:
+            return *new Vegetation(in_x, in_y);
+        case 3:
+            return *new Herbivore(in_x, in_y);
+        case 4:
+            return *new Carnivore(in_x, in_y);
+        case 5:
+            return *new Omnivore(in_x, in_y);
+        default:
+            break;
     }
 }
 

@@ -10,6 +10,10 @@ private:
 
     int random_number_generator(int range);
 
+    void set_all_animal_to_has_not_moved();
+
+    Animal& random_character_generator(int in_x, int in_y);
+
 public:
     GameStart();
 
@@ -20,9 +24,6 @@ public:
     GameStart & place_random_characters_at_random_locations_on_the_board();
 
     GameStart & move_oneRound();
-
-    void set_all_animal_to_has_not_moved();
-
 };
 
 

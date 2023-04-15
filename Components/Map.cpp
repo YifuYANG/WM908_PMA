@@ -23,6 +23,7 @@ Map::Map(int x, int y) {
             this->board[i][j] = 0;
         }
     }
+    place_blocks();
 }
 
 Map::~Map(){
@@ -33,7 +34,6 @@ Map::~Map(){
 }
 
 void Map::display() {
-    cout<<"><=======================================================><"<<endl;
     for (int i = 0; i < y; i++) {
         // Display the horizontal lines between rows
         cout << string(x * 4, '-') << "-" << endl;
@@ -60,45 +60,17 @@ void Map::display() {
  * character number-> {[0]: empty, [1] #, [2]: T, [3]: H, [4]: C, [5]: O, [6]: R}.
  * */
 bool Map::placeAt(Animal animal) {
-    int X=animal.getX();
-    int Y=animal.getY();
-    int Character = animal.getCharacter();
-    if(!check_boundary(X,Y)){
+    int X = animal.getX();
+    int Y = animal.getY();
+    int character = animal.getCharacter();
+    if (!check_boundary(X, Y) || check_collision(X, Y)) {
         return false;
-    } else if (check_collision(X,Y)){
-        if(animal.check_for_same_position()){
-            store_animals_to_container(animal);
-            board[X][Y] = Character;
-            //cout << "==> Placing character [" << DISPLAY[Character] << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
-            return true;
-        }
-        return false;
-    } else {
-        store_animals_to_container(animal);
-        board[X][Y] = Character;
-//        if (DISPLAY[Character] == " # ") {
-//            cout << "==> Placing block [" << DISPLAY[Character] << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
-//        } else {
-//            cout << "==> Placing character [" << DISPLAY[Character] << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
-//        }
-        return true;
     }
+    store_animals_to_container(animal);
+    board[X][Y] = character;
+    string display = DISPLAY[character];
+    return true;
 }
-
-//bool Map::placeAt(Animal animal) {
-//    int X = animal.getX();
-//    int Y = animal.getY();
-//    int character = animal.getCharacter();
-//    if (!check_boundary(X, Y) || check_collision(X, Y) && !animal.check_for_same_position()) {
-//        return false;
-//    }
-//    store_animals_to_container(animal);
-//    board[X][Y] = character;
-//    string display = DISPLAY[character];
-//    string name = display == " # " ? "block" : "character";
-//    cout << "==> Placing " << name << " [" << display << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
-//    return true;
-//}
 
 
 string Map::getXY(int input_X,int input_Y) {
@@ -145,7 +117,6 @@ void Map::store_animals_to_container(Animal animal) {
         default:
             return;
     }
-
     if(list.checkByIndex(animal.getIndex())){
         newanimal->setIndex(animal.getIndex());
         newanimal->setWhetherThisAnimalHasMovedOrNot(true);
@@ -158,4 +129,12 @@ void Map::store_animals_to_container(Animal animal) {
 
 SinglyLinkedList &Map::getList() {
     return list;
+}
+
+void Map::place_blocks() {
+    for(int i=0;i<12;i++){
+        int rand_i = rand() % y;
+        int rand_j = rand() % x;
+        board[rand_i][rand_j] = 1;
+    }
 }
