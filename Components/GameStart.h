@@ -8,11 +8,15 @@ class GameStart {
 private:
     Map* initializedBoard = nullptr;
 
+    int number_of_steps=-1;
+
     int random_number_generator(int range);
 
     void set_all_animal_to_has_not_moved();
 
     Animal& random_character_generator(int in_x, int in_y);
+
+    void display_counter();
 
 public:
     GameStart();

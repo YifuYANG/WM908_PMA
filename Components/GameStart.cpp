@@ -15,6 +15,7 @@ GameStart &GameStart::display() {
         this->initializedBoard->display();
     }
     //display counter
+    display_counter();
     return *this;
 }
 
@@ -81,6 +82,35 @@ Animal& GameStart::random_character_generator(int in_x, int in_y) {
         default:
             break;
     }
+}
+
+void GameStart::display_counter() {
+    int T_counter=0;
+    int H_counter=0;
+    int C_counter=0;
+    int O_counter=0;
+
+    SinglyLinkedList list = initializedBoard->getList();
+    for(int i=1;i<=list.GetSize();i++){
+        int character=list.getByIndex(i)->getData()->getCharacter();
+        if(character == 2){
+            T_counter++;
+        } else if (character == 3){
+            H_counter++;
+        } else if(character == 4){
+            C_counter++;
+        } else {
+            O_counter++;
+        }
+    }
+    number_of_steps++;
+    if(number_of_steps==0){
+        cout<<"↑ Initial Board => [";
+    } else {
+        cout<<"↑ Step "<< number_of_steps<<" => [";
+    }
+    cout<< "T: " << T_counter <<" H: "<<H_counter <<" C: "<<C_counter <<" O: "<<O_counter<<"] "<<endl;
+
 }
 
 
