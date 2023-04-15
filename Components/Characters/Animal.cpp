@@ -100,3 +100,11 @@ void Animal::setX(int x) {
 void Animal::setY(int y) {
     Y = y;
 }
+
+int Animal::getHp() {
+    return HP;
+}
+
+void Animal::setHp(int hp) {
+    HP = hp;
+}

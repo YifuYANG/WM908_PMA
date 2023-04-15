@@ -10,6 +10,7 @@ protected:
     int X, Y;
     int index;
     int character;
+    int HP;
 private:
 
     bool whether_this_animal_has_moved_or_not;
@@ -50,6 +51,10 @@ public:
     void setX(int x);
 
     void setY(int y);
+
+    int getHp();
+
+    void setHp(int hp);
 };
 
 

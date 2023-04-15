@@ -22,6 +22,7 @@ GameStart &GameStart::display() {
 GameStart& GameStart::move_oneRound() {
     for (int i = 1; i <= initializedBoard->getList().GetSize(); i++) {
         Animal& animal = *initializedBoard->getList().getByIndex(i)->getData();
+        if(animal.getCharacter()==2) continue;
         int x = animal.getX();
         int y = animal.getY();
         animal.move();
@@ -35,7 +36,6 @@ GameStart& GameStart::move_oneRound() {
         }
         set_all_animal_to_has_not_moved();
     }
-
     return *this;
 }
 
@@ -105,9 +105,9 @@ void GameStart::display_counter() {
     }
     number_of_steps++;
     if(number_of_steps==0){
-        cout<<"↑ Initial Board => [";
+        cout<<"Initial Board => [";
     } else {
-        cout<<"↑ Step "<< number_of_steps<<" => [";
+        cout<<"Step "<< number_of_steps<<" => [";
     }
     cout<< "T: " << T_counter <<" H: "<<H_counter <<" C: "<<C_counter <<" O: "<<O_counter<<"] "<<endl;
 
