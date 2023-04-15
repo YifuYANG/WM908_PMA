@@ -18,16 +18,15 @@ GameStart &GameStart::display() {
 }
 
 GameStart& GameStart::move_oneRound() {
-    //board_refresher();
     for (int i = 1; i <= initializedBoard->getList().GetSize(); i++) {
         Animal& animal = *initializedBoard->getList().getByIndex(i)->getData();
         int x = animal.getX();
         int y = animal.getY();
         if (!animal.isWhetherThisAnimalHasMovedOrNot()) {
             while (true) {
-                cout<<"Old X: "<<x<<" Old Y: "<<y<<endl;
+                //cout<<"Old X: "<<x<<" Old Y: "<<y<<endl;
                 animal.move();
-                cout<<"New X: "<<animal.getX()<<" New Y: "<<animal.getY()<<endl;
+                //cout<<"New X: "<<animal.getX()<<" New Y: "<<animal.getY()<<endl;
                 if (initializedBoard->placeAt(animal)) {
                     if(!animal.check_for_same_position()){
                         initializedBoard->board[x][y]=0;
@@ -38,7 +37,9 @@ GameStart& GameStart::move_oneRound() {
                 animal.setY(y);
             }
         }
+        set_all_animal_to_has_not_moved();
     }
+
     return *this;
 }
 
@@ -74,20 +75,10 @@ int GameStart::random_number_generator(int range) {
     return rand() % range;
 }
 
-void GameStart::printList() {
+void GameStart::set_all_animal_to_has_not_moved() {
     SinglyLinkedList list=this->initializedBoard->getList();
-    list.printList();
-}
-
-void GameStart::board_refresher() {
-    for(int i=0;i<initializedBoard->getY();i++){
-        for(int j=0;j<initializedBoard->getX();j++){
-            if(initializedBoard->board[i][j]==0 || initializedBoard->board[i][j]==1){
-                continue;
-            } else {
-                initializedBoard->board[i][j]=0;
-            }
-        }
+    for(int i=1;i<list.GetSize();i++){
+        list.getByIndex(i)->getData()->setWhetherThisAnimalHasMovedOrNot(false);
     }
 }
 

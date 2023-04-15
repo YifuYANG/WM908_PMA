@@ -33,6 +33,7 @@ Map::~Map(){
 }
 
 void Map::display() {
+    cout<<"><=======================================================><"<<endl;
     for (int i = 0; i < y; i++) {
         // Display the horizontal lines between rows
         cout << string(x * 4, '-') << "-" << endl;
@@ -68,18 +69,18 @@ bool Map::placeAt(Animal animal) {
         if(animal.check_for_same_position()){
             store_animals_to_container(animal);
             board[X][Y] = Character;
-            cout << "==> Placing character [" << DISPLAY[Character] << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
+            //cout << "==> Placing character [" << DISPLAY[Character] << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
             return true;
         }
         return false;
     } else {
         store_animals_to_container(animal);
         board[X][Y] = Character;
-        if (DISPLAY[Character] == " # ") {
-            cout << "==> Placing block [" << DISPLAY[Character] << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
-        } else {
-            cout << "==> Placing character [" << DISPLAY[Character] << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
-        }
+//        if (DISPLAY[Character] == " # ") {
+//            cout << "==> Placing block [" << DISPLAY[Character] << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
+//        } else {
+//            cout << "==> Placing character [" << DISPLAY[Character] << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
+//        }
         return true;
     }
 }

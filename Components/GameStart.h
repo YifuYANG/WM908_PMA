@@ -10,7 +10,6 @@ private:
 
     int random_number_generator(int range);
 
-    void board_refresher();
 public:
     GameStart();
 
@@ -22,7 +21,7 @@ public:
 
     GameStart & move_oneRound();
 
-    void printList();
+    void set_all_animal_to_has_not_moved();
 
 };
 
