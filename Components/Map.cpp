@@ -64,7 +64,13 @@ bool Map::placeAt(Animal animal) {
     int Character = animal.getCharacter();
     if(!check_boundary(X,Y)){
         return false;
-    } else if(!check_collision(X,Y) && !list.checkByIndex(animal.getIndex())){
+    } else if (check_collision(X,Y)){
+        if(animal.check_for_same_position()){
+            store_animals_to_container(animal);
+            board[X][Y] = Character;
+            cout << "==> Placing character [" << DISPLAY[Character] << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
+            return true;
+        }
         return false;
     } else {
         store_animals_to_container(animal);
@@ -78,6 +84,22 @@ bool Map::placeAt(Animal animal) {
     }
 }
 
+//bool Map::placeAt(Animal animal) {
+//    int X = animal.getX();
+//    int Y = animal.getY();
+//    int character = animal.getCharacter();
+//    if (!check_boundary(X, Y) || check_collision(X, Y) && !animal.check_for_same_position()) {
+//        return false;
+//    }
+//    store_animals_to_container(animal);
+//    board[X][Y] = character;
+//    string display = DISPLAY[character];
+//    string name = display == " # " ? "block" : "character";
+//    cout << "==> Placing " << name << " [" << display << "] to coordinate [" << X+1 << " X " << Y+1 << "]" << endl;
+//    return true;
+//}
+
+
 string Map::getXY(int input_X,int input_Y) {
     if(!check_boundary(input_X,input_Y)){
         return "Error!! Input out of bound!!";
@@ -88,7 +110,7 @@ string Map::getXY(int input_X,int input_Y) {
 
 // helper function for placeAt & rand_place, which checks for collision.
 bool Map::check_collision(int input_X,int input_Y) {
-    return board[input_X][input_Y] == 0;
+    return board[input_X][input_Y] != 0;
 }
 
 //helper function for placeAt & rand_place, which checks for boundary.

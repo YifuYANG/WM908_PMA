@@ -60,6 +60,8 @@ int Animal::getY() {
 
 
 void Animal::move() {
+    save_x = X;
+    save_y = Y;
     Direction drection=rand_direction_generator();
     if((int)drection == 0){
         X = X - 1;
@@ -99,4 +101,24 @@ void Animal::setX(int x) {
 
 void Animal::setY(int y) {
     Y = y;
+}
+
+int Animal::getSaveX() {
+    return save_x;
+}
+
+void Animal::setSaveX(int saveX) {
+    save_x = saveX;
+}
+
+int Animal::getSaveY() {
+    return save_y;
+}
+
+void Animal::setSaveY(int saveY) {
+    save_y = saveY;
+}
+
+bool Animal::check_for_same_position() {
+    return save_y == Y && save_x == X;
 }

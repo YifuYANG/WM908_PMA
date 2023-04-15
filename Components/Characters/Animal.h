@@ -8,6 +8,7 @@ class Animal {
 protected:
     int MP;
     int X, Y;
+    int save_x=-1, save_y=-1;
     int index;
     int character;
 private:
@@ -50,6 +51,16 @@ public:
     void setX(int x);
 
     void setY(int y);
+
+    int getSaveX();
+
+    void setSaveX(int saveX);
+
+    int getSaveY();
+
+    void setSaveY(int saveY);
+
+    bool check_for_same_position();
 };
 
 

@@ -18,7 +18,7 @@ GameStart &GameStart::display() {
 }
 
 GameStart& GameStart::move_oneRound() {
-    board_refresher();
+    //board_refresher();
     for (int i = 1; i <= initializedBoard->getList().GetSize(); i++) {
         Animal& animal = *initializedBoard->getList().getByIndex(i)->getData();
         int x = animal.getX();
@@ -29,6 +29,9 @@ GameStart& GameStart::move_oneRound() {
                 animal.move();
                 cout<<"New X: "<<animal.getX()<<" New Y: "<<animal.getY()<<endl;
                 if (initializedBoard->placeAt(animal)) {
+                    if(!animal.check_for_same_position()){
+                        initializedBoard->board[x][y]=0;
+                    }
                     break;
                 }
                 animal.setX(x);
@@ -47,8 +50,17 @@ GameStart & GameStart::place_random_characters_at_random_locations_on_the_board(
             rand_X = random_number_generator(initializedBoard->getY());
             rand_Y = random_number_generator(initializedBoard->getX());
         } while(!initializedBoard->placeAt(*new Carnivore(rand_X,rand_Y)));
-        initializedBoard->placeAt(*new Carnivore(rand_X,rand_Y));
+
     }
+//    initializedBoard->placeAt(*new Carnivore(0,0));
+//    initializedBoard->placeAt(*new Carnivore(0,1));
+//    initializedBoard->placeAt(*new Carnivore(0,2));
+//    initializedBoard->placeAt(*new Carnivore(1,0));
+//    initializedBoard->placeAt(*new Carnivore(1,1));
+//    initializedBoard->placeAt(*new Carnivore(1,2));
+//    initializedBoard->placeAt(*new Carnivore(2,0));
+//    initializedBoard->placeAt(*new Carnivore(2,1));
+//    initializedBoard->placeAt(*new Carnivore(2,2));
     return *this;
 }
 
