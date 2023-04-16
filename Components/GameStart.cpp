@@ -41,9 +41,8 @@ GameStart& GameStart::move_oneRound() {
             }
         }
     }
+//    initializedBoard->getList().printList();
     set_all_animal_to_has_not_moved();
-    cout<<"====================="<<endl;
-    initializedBoard->getList().printList();
     return *this;
 }
 
@@ -57,7 +56,7 @@ GameStart & GameStart::place_random_characters_at_random_locations_on_the_board(
         } while(!initializedBoard->placeAt(random_character_generator(rand_X,rand_Y)));
     }
 
-    initializedBoard->getList().printList();
+//    initializedBoard->getList().printList();
 
 //    initializedBoard->placeAt(*new Omnivore(0,0));
 //    initializedBoard->placeAt(*new Vegetation(0,1));

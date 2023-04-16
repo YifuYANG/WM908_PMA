@@ -66,7 +66,8 @@ void SinglyLinkedList::printList() {
 
     while (temp != nullptr) {
         cout <<"Index -> "<< temp->getData()->getIndex()<<" holds ->";
-        cout << temp->getData()->getX() << " X " << temp->getData()->getY() <<endl;
+        cout << temp->getData()->getX() << " X " << temp->getData()->getY();
+        cout<<" moved or not: "<<temp->getData()->isWhetherThisAnimalHasMovedOrNot()<<endl;
         temp = temp->getNext();
     }
 }

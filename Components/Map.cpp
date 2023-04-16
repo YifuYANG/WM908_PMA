@@ -66,8 +66,12 @@ bool Map::placeAt(Animal animal) {
     if (!check_boundary(X, Y) || check_collision(X, Y)) {
         return false;
     }
-    animal.setWhetherThisAnimalHasMovedOrNot(true);
-    store_animals_to_container(animal);
+
+    if(!list.checkByIndex(animal.getIndex())){
+        store_animals_to_container(animal);
+    } else {
+        list.getByIndex(animal.getIndex())->getData()->setWhetherThisAnimalHasMovedOrNot(true);
+    }
     board[X][Y] = character;
     return true;
 }
@@ -99,36 +103,56 @@ int Map::getY() const {
     return y;
 }
 
+//void Map::store_animals_to_container(Animal animal) {
+//    Animal* newanimal;
+//    switch (animal.getCharacter()) {
+//        case 2:
+//            newanimal = new Vegetation(animal.getX(), animal.getY(), index);
+//            break;
+//        case 3:
+//            newanimal = new Herbivore(animal.getX(), animal.getY(), index);
+//            break;
+//        case 4:
+//            newanimal = new Carnivore(animal.getX(), animal.getY(), index);
+//            break;
+//        case 5:
+//            newanimal = new Omnivore(animal.getX(), animal.getY(), index);
+//            break;
+//        default:
+//            return;
+//    }
+//    if(!list.checkByIndex(animal.getIndex())){
+//        list.Insert(newanimal);
+//        index++;
+//    }
+////    if(list.checkByIndex(animal.getIndex())){
+////        newanimal->setIndex(animal.getIndex());
+////        newanimal->setWhetherThisAnimalHasMovedOrNot(true);
+////        list.ReplaceByIndex(animal.getIndex(),newanimal);
+////    } else {
+////        list.Insert(newanimal);
+////        index++;
+////    }
+//}
+
 void Map::store_animals_to_container(Animal animal) {
-    Animal* newanimal;
     switch (animal.getCharacter()) {
         case 2:
-            newanimal = new Vegetation(animal.getX(), animal.getY(), index);
+            list.Insert(new Vegetation(animal.getX(), animal.getY(), index));
             break;
         case 3:
-            newanimal = new Herbivore(animal.getX(), animal.getY(), index);
+            list.Insert(new Herbivore(animal.getX(), animal.getY(), index));
             break;
         case 4:
-            newanimal = new Carnivore(animal.getX(), animal.getY(), index);
+            list.Insert(new Carnivore(animal.getX(), animal.getY(), index));
             break;
         case 5:
-            newanimal = new Omnivore(animal.getX(), animal.getY(), index);
+            list.Insert(new Omnivore(animal.getX(), animal.getY(), index));
             break;
         default:
             return;
     }
-    if(!list.checkByIndex(animal.getIndex())){
-        list.Insert(newanimal);
-        index++;
-    }
-//    if(list.checkByIndex(animal.getIndex())){
-//        newanimal->setIndex(animal.getIndex());
-//        newanimal->setWhetherThisAnimalHasMovedOrNot(true);
-//        list.ReplaceByIndex(animal.getIndex(),newanimal);
-//    } else {
-//        list.Insert(newanimal);
-//        index++;
-//    }
+    index++;
 }
 
 SinglyLinkedList &Map::getList() {
