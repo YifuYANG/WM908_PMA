@@ -23,37 +23,35 @@ int SinglyLinkedList::GetSize() {
     return size;
 }
 
-void SinglyLinkedList::DeleteByIndex(int index) {
+void SinglyLinkedList::DeleteByXY(int x, int y) {
     if(head==nullptr){
         cout << "List empty." << endl;
         return;
     }
-    if(head->getData()->getIndex()==index){
+    if(head->getData()->getX()==x && head->getData()->getX()==y){
         head=head->getNext();
+        Node* temp = head;
+        while (temp != nullptr) {
+            temp->getData()->setIndex(temp->getData()->getIndex()-1);
+            temp = temp->getNext();
+        }
         size--;
     }
     Node* temp = head;
     while (temp->getNext()!= nullptr){
-        if(temp->getNext()->getData()->getIndex()==index){
+        if(temp->getNext()->getData()->getX()==x && temp->getNext()->getData()->getY()==y){
             temp->setNext(temp->getNext()->getNext());
             size--;
+            temp=temp->getNext();
+            while (temp != nullptr) {
+                temp->getData()->setIndex(temp->getData()->getIndex()-1);
+                temp = temp->getNext();
+            }
             return;
         } else {
             temp=temp->getNext();
         }
     }
-}
-
-void SinglyLinkedList::ReplaceByIndex(int index, Animal* data) {
-    Node* temp = head;
-    while (temp != nullptr) {
-        if (temp->getData()->getIndex() == index) {
-            temp->setData(data);
-            return;
-        }
-        temp = temp->getNext();
-    }
-    cout << "Data not found" << endl;
 }
 
 
@@ -67,7 +65,8 @@ void SinglyLinkedList::printList() {
     while (temp != nullptr) {
         cout <<"Index -> "<< temp->getData()->getIndex()<<" holds ->";
         cout << temp->getData()->getX() << " X " << temp->getData()->getY();
-        cout<<" moved or not: "<<temp->getData()->isWhetherThisAnimalHasMovedOrNot()<<endl;
+        cout<<" character: "<<temp->getData()->getCharacter();
+        cout<<" HP: "<<temp->getData()->getHp()<<endl;
         temp = temp->getNext();
     }
 }
@@ -103,6 +102,7 @@ Node* SinglyLinkedList::getByXY(int x, int y) {
         }
         temp = temp->getNext();
     }
-    cout << "Index not found" << endl;
+
+    cout << "XY not found: " <<x<<" X "<<y<<endl;
     return nullptr;
 }

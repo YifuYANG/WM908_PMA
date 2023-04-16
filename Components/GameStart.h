@@ -24,6 +24,8 @@ private:
 
     void loss_HP_due_to_hunger(Animal* animal);
 
+    void remove_animals_with_no_HP();
+
 public:
     GameStart();
 

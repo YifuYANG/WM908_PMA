@@ -23,7 +23,7 @@ Map::Map(int x, int y) {
             this->board[i][j] = 0;
         }
     }
-    //place_blocks();
+    place_blocks();
 }
 
 Map::~Map(){
@@ -79,7 +79,7 @@ bool Map::placeAt(Animal animal) {
 
 
 bool Map::getXY(int input_X, int input_Y) {
-    return check_boundary(input_X, input_Y) && board[input_X][input_Y] != 0;
+    return check_boundary(input_X, input_Y) && board[input_X][input_Y] != 0 && board[input_X][input_Y] != 1;
 }
 
 // helper function for placeAt & rand_place, which checks for collision.

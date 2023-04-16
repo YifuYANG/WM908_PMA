@@ -10,7 +10,10 @@ int main() {
     GameStart gameStart;
     gameStart.InitializeBoard().
             place_random_characters_at_random_locations_on_the_board().
-            display().
-            move_oneRound().
             display();
+
+    while(true){
+        gameStart.move_oneRound().
+                display();
+    }
 }

@@ -12,7 +12,6 @@ GameStart &GameStart::InitializeBoard() {
 GameStart &GameStart::display() {
     //display map
     if(this->initializedBoard != nullptr) {
-        //check animals HP
         this->initializedBoard->display();
     }
     //display counter
@@ -26,7 +25,9 @@ GameStart& GameStart::move_oneRound() {
         if(animal.getCharacter()==(int) Characters::Vegetation) continue;
         int x = animal.getX();
         int y = animal.getY();
+        cout<<"Old XY: "<<x<<" X "<<y<<endl;
         animal.move();
+        cout<<"New XY: "<<animal.getX()<<" X "<<animal.getY()<<endl;
         if (!animal.isWhetherThisAnimalHasMovedOrNot()) {
             if (initializedBoard->placeAt(animal)) {
                 initializedBoard->board[x][y]=0;
@@ -41,35 +42,19 @@ GameStart& GameStart::move_oneRound() {
         }
     }
     set_all_animal_to_has_not_moved();
+    //remove_animals_with_no_HP();
     return *this;
 }
 
 GameStart & GameStart::place_random_characters_at_random_locations_on_the_board() {
-//    for(int i=0;i<10; i++){
-//        int rand_X;
-//        int rand_Y;
-//        do{
-//            rand_X = random_number_generator(initializedBoard->getY());
-//            rand_Y = random_number_generator(initializedBoard->getX());
-//        } while(!initializedBoard->placeAt(random_character_generator(rand_X,rand_Y)));
-//    }
-
-    initializedBoard->placeAt(*new Omnivore(0,0));
-    initializedBoard->placeAt(*new Vegetation(0,1));
-    initializedBoard->placeAt(*new Vegetation(1,1));
-    initializedBoard->placeAt(*new Vegetation(1,0));
-    initializedBoard->placeAt(*new Omnivore(0,2));
-    initializedBoard->placeAt(*new Omnivore(1,2));
-    initializedBoard->placeAt(*new Omnivore(2,2));
-    initializedBoard->placeAt(*new Omnivore(2,0));
-    initializedBoard->placeAt(*new Omnivore(2,1));
-    initializedBoard->placeAt(*new Vegetation(0,3));
-    initializedBoard->placeAt(*new Vegetation(1,3));
-    initializedBoard->placeAt(*new Vegetation(2,3));
-    initializedBoard->placeAt(*new Vegetation(3,3));
-    initializedBoard->placeAt(*new Vegetation(3,0));
-    initializedBoard->placeAt(*new Vegetation(3,1));
-    initializedBoard->placeAt(*new Vegetation(3,2));
+    for(int i=0;i<15; i++){
+        int rand_X;
+        int rand_Y;
+        do{
+            rand_X = random_number_generator(initializedBoard->getY());
+            rand_Y = random_number_generator(initializedBoard->getX());
+        } while(!initializedBoard->placeAt(random_character_generator(rand_X,rand_Y)));
+    }
     return *this;
 }
 
@@ -162,6 +147,16 @@ void GameStart::loss_HP_due_to_being_consumed(Animal *animal) {
 
 void GameStart::loss_HP_due_to_hunger(Animal* animal) {
     animal->setHp(animal->getHp()-1);
+}
+
+void GameStart::remove_animals_with_no_HP() {
+    SinglyLinkedList& list = initializedBoard->getList();
+    for(int i=1;i<=list.GetSize();i++){
+        if(list.getByIndex(i)->getData()->getHp()<=0){
+            list.DeleteByXY(list.getByIndex(i)->getData()->getX(),list.getByIndex(i)->getData()->getY());
+            initializedBoard->board[list.getByIndex(i)->getData()->getX()][list.getByIndex(i)->getData()->getY()]=0;
+        }
+    }
 }
 
 

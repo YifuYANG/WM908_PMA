@@ -15,13 +15,11 @@ public:
 
     int GetSize();
 
-    void DeleteByIndex(int index);
+    void DeleteByXY(int x, int y);
 
     void printList();
 
     Node* getByXY(int x, int y);
-
-    void ReplaceByIndex(int index, Animal* newData);
 
     Node* getByIndex(int index);
 
