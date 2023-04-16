@@ -15,9 +15,11 @@ public:
 
     int GetSize();
 
-    void DeleteByData(Animal* data);
+    void DeleteByIndex(int index);
 
     void printList();
+
+    Node* getByXY(int x, int y);
 
     void ReplaceByIndex(int index, Animal* newData);
 

@@ -18,6 +18,8 @@ private:
 
     void display_counter();
 
+    void interaction(int next_x,int next_y, int pre_x, int pre_y);
+
 public:
     GameStart();
 

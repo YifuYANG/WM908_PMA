@@ -23,7 +23,7 @@ Map::Map(int x, int y) {
             this->board[i][j] = 0;
         }
     }
-    place_blocks();
+    //place_blocks();
 }
 
 Map::~Map(){
@@ -66,9 +66,9 @@ bool Map::placeAt(Animal animal) {
     if (!check_boundary(X, Y) || check_collision(X, Y)) {
         return false;
     }
+    animal.setWhetherThisAnimalHasMovedOrNot(true);
     store_animals_to_container(animal);
     board[X][Y] = character;
-    string display = DISPLAY[character];
     return true;
 }
 
@@ -117,14 +117,18 @@ void Map::store_animals_to_container(Animal animal) {
         default:
             return;
     }
-    if(list.checkByIndex(animal.getIndex())){
-        newanimal->setIndex(animal.getIndex());
-        newanimal->setWhetherThisAnimalHasMovedOrNot(true);
-        list.ReplaceByIndex(animal.getIndex(),newanimal);
-    } else {
+    if(!list.checkByIndex(animal.getIndex())){
         list.Insert(newanimal);
         index++;
     }
+//    if(list.checkByIndex(animal.getIndex())){
+//        newanimal->setIndex(animal.getIndex());
+//        newanimal->setWhetherThisAnimalHasMovedOrNot(true);
+//        list.ReplaceByIndex(animal.getIndex(),newanimal);
+//    } else {
+//        list.Insert(newanimal);
+//        index++;
+//    }
 }
 
 SinglyLinkedList &Map::getList() {

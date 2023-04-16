@@ -14,7 +14,5 @@ int main() {
             move_oneRound().
             display().
             move_oneRound().
-            display().
-            move_oneRound().
             display();
 }
