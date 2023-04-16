@@ -30,50 +30,46 @@ GameStart& GameStart::move_oneRound() {
         if (!animal.isWhetherThisAnimalHasMovedOrNot()) {
             if (initializedBoard->placeAt(animal)) {
                 initializedBoard->board[x][y]=0;
+                animal.setHp(animal.getHp()-1);
             } else {
                 int next_x=animal.getX();
                 int next_y=animal.getY();
                 animal.setX(x);
                 animal.setY(y);
-//                cout<<"Old: "<<x<<" X "<<y<<endl;
-//                cout<<"New: "<<next_x<<" X "<<next_y<<endl;
-//                interaction(next_x,next_y,x,y);
+                interaction(next_x,next_y,x,y);
             }
         }
     }
-//    initializedBoard->getList().printList();
     set_all_animal_to_has_not_moved();
     return *this;
 }
 
 GameStart & GameStart::place_random_characters_at_random_locations_on_the_board() {
-    for(int i=0;i<10; i++){
-        int rand_X;
-        int rand_Y;
-        do{
-            rand_X = random_number_generator(initializedBoard->getY());
-            rand_Y = random_number_generator(initializedBoard->getX());
-        } while(!initializedBoard->placeAt(random_character_generator(rand_X,rand_Y)));
-    }
+//    for(int i=0;i<10; i++){
+//        int rand_X;
+//        int rand_Y;
+//        do{
+//            rand_X = random_number_generator(initializedBoard->getY());
+//            rand_Y = random_number_generator(initializedBoard->getX());
+//        } while(!initializedBoard->placeAt(random_character_generator(rand_X,rand_Y)));
+//    }
 
-//    initializedBoard->getList().printList();
-
-//    initializedBoard->placeAt(*new Omnivore(0,0));
-//    initializedBoard->placeAt(*new Vegetation(0,1));
-//    initializedBoard->placeAt(*new Vegetation(1,1));
-//    initializedBoard->placeAt(*new Vegetation(1,0));
-//    initializedBoard->placeAt(*new Omnivore(0,2));
-//    initializedBoard->placeAt(*new Omnivore(1,2));
-//    initializedBoard->placeAt(*new Omnivore(2,2));
-//    initializedBoard->placeAt(*new Omnivore(2,0));
-//    initializedBoard->placeAt(*new Omnivore(2,1));
-//    initializedBoard->placeAt(*new Vegetation(0,3));
-//    initializedBoard->placeAt(*new Vegetation(1,3));
-//    initializedBoard->placeAt(*new Vegetation(2,3));
-//    initializedBoard->placeAt(*new Vegetation(3,3));
-//    initializedBoard->placeAt(*new Vegetation(3,0));
-//    initializedBoard->placeAt(*new Vegetation(3,1));
-//    initializedBoard->placeAt(*new Vegetation(3,2));
+    initializedBoard->placeAt(*new Omnivore(0,0));
+    initializedBoard->placeAt(*new Vegetation(0,1));
+    initializedBoard->placeAt(*new Vegetation(1,1));
+    initializedBoard->placeAt(*new Vegetation(1,0));
+    initializedBoard->placeAt(*new Omnivore(0,2));
+    initializedBoard->placeAt(*new Omnivore(1,2));
+    initializedBoard->placeAt(*new Omnivore(2,2));
+    initializedBoard->placeAt(*new Omnivore(2,0));
+    initializedBoard->placeAt(*new Omnivore(2,1));
+    initializedBoard->placeAt(*new Vegetation(0,3));
+    initializedBoard->placeAt(*new Vegetation(1,3));
+    initializedBoard->placeAt(*new Vegetation(2,3));
+    initializedBoard->placeAt(*new Vegetation(3,3));
+    initializedBoard->placeAt(*new Vegetation(3,0));
+    initializedBoard->placeAt(*new Vegetation(3,1));
+    initializedBoard->placeAt(*new Vegetation(3,2));
     return *this;
 }
 
@@ -139,32 +135,33 @@ void GameStart::display_counter() {
 }
 
 void GameStart::interaction(int next_x, int next_y, int pre_x, int pre_y) {
+    Animal* next_animal;
     SinglyLinkedList& list = initializedBoard->getList();
-    //if(list.getByXY(pre_x,pre_y)== nullptr) return;
-
-    Animal& next_animal = *list.getByXY(next_x,next_y)->getData();
+    if(initializedBoard->getXY(next_x,next_y)){
+        next_animal = list.getByXY(next_x,next_y)->getData();
+    } else {
+        return;
+    }
     Animal& pre_animal = *list.getByXY(pre_x,pre_y)->getData();
+    int pre_character = pre_animal.getCharacter();
+    int next_character = next_animal->getCharacter();
+    if(pre_character == (int) Characters::Herbivore && next_character == (int) Characters::Vegetation){
+        loss_HP_due_to_being_consumed(next_animal);
+    } else if(pre_character == (int) Characters::Carnivore && next_character == (int) Characters::Herbivore){
+        loss_HP_due_to_being_consumed(next_animal);
+    } else if (pre_character == (int) Characters::Omnivore && (next_character == (int) Characters::Herbivore || next_character == (int) Characters::Vegetation)) {
+        loss_HP_due_to_being_consumed(next_animal);
+    } else if(next_x==pre_x && next_y == pre_y){
+        loss_HP_due_to_hunger(next_animal);
+    }
+}
 
-//    int pre_character = pre_animal.getCharacter();
-//    int cur_character = animal.getCharacter();
-//    if(pre_character == (int) Characters::Herbivore && cur_character == (int) Characters::Vegetation){
-//        cout<<"Her ==========================================================> Veg"<<endl;
-//        Animal updated_animal = animal;
-//        updated_animal.setHp(updated_animal.getHp()-10);
-//        list.ReplaceByIndex(updated_animal.getIndex(), &updated_animal);
-//    } else if(pre_character == (int) Characters::Carnivore && cur_character == (int) Characters::Herbivore){
-//        cout<<"Car ==========================================================> Her"<<endl;
-//        Animal updated_animal = animal;
-//        updated_animal.setHp(updated_animal.getHp()-10);
-//        list.ReplaceByIndex(updated_animal.getIndex(), &updated_animal);
-//    } else if (pre_character == (int) Characters::Omnivore && (cur_character == (int) Characters::Herbivore || cur_character == (int) Characters::Vegetation)) {
-//        cout<<"Omn ==========================================================> H&V"<<endl;
-//        Animal updated_animal = animal;
-//        updated_animal.setHp(updated_animal.getHp()-10);
-//        list.ReplaceByIndex(updated_animal.getIndex(), &updated_animal);
-//    }
-//    cout<<"X and Y: "<<animal.getX()<<" X "<<animal.getY()<<endl;
-//    cout<<"old X and Y "<<pre_x<<" X "<<pre_y<<endl;
+void GameStart::loss_HP_due_to_being_consumed(Animal *animal) {
+        animal->setHp(animal->getHp()-10);
+}
+
+void GameStart::loss_HP_due_to_hunger(Animal* animal) {
+    animal->setHp(animal->getHp()-1);
 }
 
 

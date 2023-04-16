@@ -78,12 +78,8 @@ bool Map::placeAt(Animal animal) {
 }
 
 
-string Map::getXY(int input_X,int input_Y) {
-    if(!check_boundary(input_X,input_Y)){
-        return "Error!! Input out of bound!!";
-    } else {
-        return DISPLAY[board[input_X-1][input_Y-1]];
-    }
+bool Map::getXY(int input_X, int input_Y) {
+    return check_boundary(input_X, input_Y) && board[input_X][input_Y] != 0;
 }
 
 // helper function for placeAt & rand_place, which checks for collision.

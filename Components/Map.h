@@ -41,7 +41,7 @@ public:
 
     bool placeAt(Animal animal);
 
-    string getXY(int input_X,int input_Y);
+    bool getXY(int input_X,int input_Y);
 
     int getX() const;
 

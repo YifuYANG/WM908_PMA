@@ -20,6 +20,10 @@ private:
 
     void interaction(int next_x,int next_y, int pre_x, int pre_y);
 
+    void loss_HP_due_to_being_consumed(Animal* animal);
+
+    void loss_HP_due_to_hunger(Animal* animal);
+
 public:
     GameStart();
 
