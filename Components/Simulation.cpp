@@ -211,23 +211,25 @@ void Simulation::reproduction(Animal* animal) {
     }
 }
 
+//random spawn around the parent (four direction).
 Animal Simulation::random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(Animal* offspring) {
     int compass = rand() % 4;
     switch (compass) {
-        case 0: // Move north (increase y)
-            offspring->setY(offspring->getY()+1);
-        case 1: // Move south (decrease y)
-            offspring->setY(offspring->getY()-1);
-        case 2: // Move west (increase x)
+        case (int) Direction::South: // Move South (increase x)
             offspring->setX(offspring->getX()+1);
-        case 3: // Move east (decrease x)
+        case (int) Direction::North: // Move North (decrease x)
             offspring->setX(offspring->getX()-1);
+        case (int) Direction::East: // Move East (increase y)
+            offspring->setY(offspring->getY()+1);
+        case (int) Direction::West: // Move West (decrease y)
+            offspring->setY(offspring->getY()-1);
         default:
             break;
     }
     return *offspring;
 }
 
+//create offsprings with their parent's characters.
 Animal Simulation::determine_parent_and_generator_offspring(Animal *animal) {
     switch (animal->getCharacter()) {
         case (int)Characters::Vegetation:
@@ -243,14 +245,15 @@ Animal Simulation::determine_parent_and_generator_offspring(Animal *animal) {
     }
 }
 
+//return true if at least one animal can be placed on the board.
 bool Simulation:: determine_if_there_are_spaces_for_reproduction(int x,int y){
-    if(! (initializedBoard->placeAt(*new Animal(x-1,y))
+    if(initializedBoard->placeAt(*new Animal(x-1,y))
        || initializedBoard->placeAt(*new Animal(x+1,y))
        || initializedBoard->placeAt(*new Animal(x,y-1))
-       || initializedBoard->placeAt(*new Animal(x,y+1)))){
-        return false;
-    } else {
+       || initializedBoard->placeAt(*new Animal(x,y+1))){
         return true;
+    } else {
+        return false;
     }
 }
 
