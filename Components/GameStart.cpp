@@ -45,7 +45,7 @@ GameStart& GameStart::move_oneRound() {
         }
         temp=temp->getNext();
     }
-    //remove_animals_with_no_HP();
+    remove_animals_with_no_HP();
     return *this;
 }
 
@@ -151,13 +151,15 @@ void GameStart::loss_HP_due_to_hunger(Animal* animal) {
 }
 
 void GameStart::remove_animals_with_no_HP() {
-    SinglyLinkedList& list = initializedBoard->getList();
-//    for(int i=1;i<=list.GetSize();i++){
-//        if(list.getByIndex(i)->getData()->getHp()<=0){
-//            list.DeleteByXY(list.getByIndex(i)->getData()->getX(),list.getByIndex(i)->getData()->getY());
-//            initializedBoard->board[list.getByIndex(i)->getData()->getX()][list.getByIndex(i)->getData()->getY()]=0;
-//        }
-//    }
+    head = initializedBoard->getList().getHead();
+    Node* temp = head;
+    while (temp!= nullptr){
+        if(temp->getNext()->getData()->getHp()<=0){
+            initializedBoard->board[temp->getNext()->getData()->getX()][temp->getNext()->getData()->getY()]=0;
+            temp->setNext(temp->getNext()->getNext());
+        }
+        temp = temp->getNext();
+    }
 }
 
 

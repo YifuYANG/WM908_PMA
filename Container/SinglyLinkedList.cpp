@@ -23,38 +23,6 @@ int SinglyLinkedList::GetSize() {
     return size;
 }
 
-void SinglyLinkedList::DeleteByXY(int x, int y) {
-//    if(head==nullptr){
-//        cout << "List empty." << endl;
-//        return;
-//    }
-//    if(head->getData()->getX()==x && head->getData()->getX()==y){
-//        head=head->getNext();
-//        Node* temp = head;
-//        size--;
-//        while (temp != nullptr) {
-//            temp->getData()->setIndex(temp->getData()->getIndex()-1);
-//            temp = temp->getNext();
-//        }
-//    }
-//    Node* temp = head;
-//    while (temp->getNext()!= nullptr){
-//        if(temp->getNext()->getData()->getX()==x && temp->getNext()->getData()->getY()==y){
-//            temp->setNext(temp->getNext()->getNext());
-//            cout<<"So=izeO:: "<<size<<endl;
-//            size--;
-//            temp=temp->getNext();
-//            while (temp != nullptr) {
-//                temp->getData()->setIndex(temp->getData()->getIndex()-1);
-//                temp = temp->getNext();
-//            }
-//            return;
-//        } else {
-//            temp=temp->getNext();
-//        }
-//    }
-}
-
 
 void SinglyLinkedList::printList() {
     Node* temp = head;
