@@ -138,7 +138,10 @@ void GameStart::interaction(int next_x, int next_y, int pre_x, int pre_y) {
     } else if (pre_character == (int) Characters::Omnivore && (next_character == (int) Characters::Herbivore || next_character == (int) Characters::Vegetation)) {
         loss_HP_due_to_being_consumed(next_animal);
     } else if(next_x==pre_x && next_y == pre_y){
-        loss_HP_due_to_hunger(next_animal);
+        // wen yi wen
+        loss_HP_due_to_hunger(&pre_animal);
+    } else {
+        loss_HP_due_to_hunger(&pre_animal);
     }
 }
 
