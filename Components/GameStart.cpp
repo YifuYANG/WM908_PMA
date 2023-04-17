@@ -23,6 +23,7 @@ GameStart& GameStart::move_oneRound() {
     head = initializedBoard->getList().getHead();
     Node* temp = head;
     while (temp!= nullptr){
+        //wen yi wen
         Animal* animal = temp->getData();
         if(animal->getCharacter()==(int) Characters::Vegetation){
             temp=temp->getNext();
@@ -30,12 +31,14 @@ GameStart& GameStart::move_oneRound() {
         }
         int x = animal->getX();
         int y = animal->getY();
+        initializedBoard->getList().printList();
+        cout<<"==========="<<endl;
         //cout<<"Old XY: "<<temp->getData()->getX()<<" X "<<temp->getData()->getY()<<endl;
         animal->move();
         //cout<<"NEW XY: "<<temp->getData()->getX()<<" X "<<temp->getData()->getY()<<endl;
         if (initializedBoard->placeAt(*animal)) {
             initializedBoard->board[x][y]=0;
-            animal->setHp(animal->getHp()-1);
+            loss_HP_due_to_hunger(animal);
         } else {
             int next_x=animal->getX();
             int next_y=animal->getY();
@@ -50,7 +53,7 @@ GameStart& GameStart::move_oneRound() {
 }
 
 GameStart & GameStart::place_random_characters_at_random_locations_on_the_board() {
-    for(int i=0;i<30; i++){
+    for(int i=0;i<5; i++){
         int rand_X;
         int rand_Y;
         Animal rand_an;
@@ -140,8 +143,10 @@ void GameStart::interaction(int next_x, int next_y, int pre_x, int pre_y) {
         loss_HP_due_to_being_consumed(next_animal);
     } else if(next_x==pre_x && next_y == pre_y){
         loss_HP_due_to_hunger(pre_animal);
+        cout<<"Cant MOVE lost HP: "<<list.getByXY(pre_x,pre_y)->getData()->getHp()<<endl;
     } else {
         loss_HP_due_to_hunger(pre_animal);
+        cout<<"Cant eat lost HP: "<<list.getByXY(pre_x,pre_y)->getData()->getHp()<<endl;
     }
 }
 
