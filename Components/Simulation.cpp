@@ -192,12 +192,17 @@ void Simulation::remove_animals_with_no_HP() {
 
 void Simulation::reproduction(Animal* animal) {
     double FR = animal->getFr();
-    Animal offspring = determine_parent_and_generator_offspring(animal);
-    do{
-        random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(&offspring);
+    random_device rd;
+    mt19937 gen(rd());
+    uniform_real_distribution<> dis(0, 1);
+    if(dis(gen) < FR){
+        Animal offspring = determine_parent_and_generator_offspring(animal);
+        do{
+            random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(&offspring);
+        }
+        while(!initializedBoard->placeAt(offspring));
+        initializedBoard->board[offspring.getX()][offspring.getY()]=offspring.getCharacter();
     }
-    while(!initializedBoard->placeAt(offspring));
-    initializedBoard->board[offspring.getX()][offspring.getY()]=offspring.getCharacter();
 }
 
 Animal Simulation::random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(Animal* offspring) {
