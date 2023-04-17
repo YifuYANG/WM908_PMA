@@ -30,6 +30,10 @@ private:
 
     void reproduction(Animal* animal);
 
+    Animal determine_parent_and_generator_offspring(Animal* animal);
+
+    Animal random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(Animal* animal);
+
 public:
     Simulation();
 

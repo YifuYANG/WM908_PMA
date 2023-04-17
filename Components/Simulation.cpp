@@ -26,7 +26,7 @@ Simulation& Simulation::move_oneRound() {
     while (temp!= nullptr){
         //wen yi wen
         Animal* animal = temp->getData();
-
+        reproduction(animal);
         if(animal->getCharacter()==(int) Characters::Vegetation){
             temp=temp->getNext();
             continue;
@@ -192,15 +192,46 @@ void Simulation::remove_animals_with_no_HP() {
 
 void Simulation::reproduction(Animal* animal) {
     double FR = animal->getFr();
-
-    if(animal->getCharacter()==(int) Characters::Vegetation){
-        if(initializedBoard->placeAt(*new Vegetation(1,1))){
-
-        }
+    Animal offspring = determine_parent_and_generator_offspring(animal);
+    do{
+        random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(&offspring);
     }
-
-
+    while(!initializedBoard->placeAt(offspring));
+    initializedBoard->board[offspring.getX()][offspring.getY()]=offspring.getCharacter();
 }
+
+Animal Simulation::random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(Animal* offspring) {
+    int compass = rand() % 4;
+    switch (compass) {
+        case 0: // Move north (increase y)
+            offspring->setY(offspring->getY()+1);
+        case 1: // Move south (decrease y)
+            offspring->setY(offspring->getY()-1);
+        case 2: // Move west (increase x)
+            offspring->setX(offspring->getX()+1);
+        case 3: // Move east (decrease x)
+            offspring->setX(offspring->getX()-1);
+        default:
+            break;
+    }
+    return *offspring;
+}
+
+Animal Simulation::determine_parent_and_generator_offspring(Animal *animal) {
+    switch (animal->getCharacter()) {
+        case (int)Characters::Vegetation:
+            return *new Vegetation(animal->getX(),animal->getY());
+        case (int)Characters::Herbivore:
+            return *new Herbivore(animal->getX(),animal->getY());
+        case (int)Characters::Carnivore:
+            return *new Carnivore(animal->getX(),animal->getY());
+        case (int)Characters::Omnivore:
+            return *new Omnivore(animal->getX(),animal->getY());
+        default:
+            break;
+    }
+}
+
 
 
 
