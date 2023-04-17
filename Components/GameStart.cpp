@@ -120,6 +120,7 @@ void GameStart::display_counter() {
     cout<< "T: " << T_counter <<" H: "<<H_counter <<" C: "<<C_counter <<" O: "<<O_counter<<"] "<<endl;
 }
 
+//wen yi wen?
 void GameStart::interaction(int next_x, int next_y, int pre_x, int pre_y) {
     Animal* next_animal;
     SinglyLinkedList& list = initializedBoard->getList();
@@ -128,8 +129,8 @@ void GameStart::interaction(int next_x, int next_y, int pre_x, int pre_y) {
     } else {
         return;
     }
-    Animal& pre_animal = *list.getByXY(pre_x,pre_y)->getData();
-    int pre_character = pre_animal.getCharacter();
+    Animal* pre_animal = list.getByXY(pre_x,pre_y)->getData();
+    int pre_character = pre_animal->getCharacter();
     int next_character = next_animal->getCharacter();
     if(pre_character == (int) Characters::Herbivore && next_character == (int) Characters::Vegetation){
         loss_HP_due_to_being_consumed(next_animal);
@@ -138,10 +139,9 @@ void GameStart::interaction(int next_x, int next_y, int pre_x, int pre_y) {
     } else if (pre_character == (int) Characters::Omnivore && (next_character == (int) Characters::Herbivore || next_character == (int) Characters::Vegetation)) {
         loss_HP_due_to_being_consumed(next_animal);
     } else if(next_x==pre_x && next_y == pre_y){
-        // wen yi wen
-        loss_HP_due_to_hunger(&pre_animal);
+        loss_HP_due_to_hunger(pre_animal);
     } else {
-        loss_HP_due_to_hunger(&pre_animal);
+        loss_HP_due_to_hunger(pre_animal);
     }
 }
 
