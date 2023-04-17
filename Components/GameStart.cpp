@@ -138,10 +138,13 @@ void GameStart::interaction(int next_x, int next_y, int pre_x, int pre_y) {
     int pre_character = pre_animal->getCharacter();
     int next_character = next_animal->getCharacter();
     if(pre_character == (int) Characters::Herbivore && next_character == (int) Characters::Vegetation){
+        get_HP_due_to_consuming(pre_animal);
         loss_HP_due_to_being_consumed(next_animal);
     } else if(pre_character == (int) Characters::Carnivore && next_character == (int) Characters::Herbivore){
+        get_HP_due_to_consuming(pre_animal);
         loss_HP_due_to_being_consumed(next_animal);
     } else if (pre_character == (int) Characters::Omnivore && (next_character == (int) Characters::Herbivore || next_character == (int) Characters::Vegetation)) {
+        get_HP_due_to_consuming(pre_animal);
         loss_HP_due_to_being_consumed(next_animal);
     } else if(next_x==pre_x && next_y == pre_y){
         loss_HP_due_to_hunger(pre_animal);
@@ -179,6 +182,10 @@ void GameStart::remove_animals_with_no_HP() {
             curr = curr->getNext();
         }
     }
+}
+
+void GameStart::get_HP_due_to_consuming(Animal *animal) {
+    animal->setHp(animal->getHp()+10);
 }
 
 
