@@ -1,30 +1,32 @@
-#include "GameStart.h"
+#include "Simulation.h"
 
 
-GameStart::GameStart() = default;
+Simulation::Simulation() = default;
 
 
-GameStart &GameStart::InitializeBoard() {
+Simulation &Simulation::InitializeBoard() {
     this->initializedBoard = new Map(10,7);
     return *this;
 }
 
-GameStart &GameStart::display() {
+Simulation &Simulation::display() {
     //display map
     if(this->initializedBoard != nullptr) {
         this->initializedBoard->display();
     }
     //display counter
     display_counter();
+    initializedBoard->getList().printList();
     return *this;
 }
 
-GameStart& GameStart::move_oneRound() {
+Simulation& Simulation::move_oneRound() {
     head = initializedBoard->getList().getHead();
     Node* temp = head;
     while (temp!= nullptr){
         //wen yi wen
         Animal* animal = temp->getData();
+
         if(animal->getCharacter()==(int) Characters::Vegetation){
             temp=temp->getNext();
             continue;
@@ -53,7 +55,7 @@ GameStart& GameStart::move_oneRound() {
     return *this;
 }
 
-GameStart & GameStart::place_random_characters_at_random_locations_on_the_board() {
+Simulation & Simulation::place_random_characters_at_random_locations_on_the_board() {
     for(int i=0;i<15; i++){
         int rand_X;
         int rand_Y;
@@ -74,12 +76,12 @@ GameStart & GameStart::place_random_characters_at_random_locations_on_the_board(
  * it will generate number -> 0 - 9,
  * which corresponds to the array index.
  * */
-int GameStart::random_number_generator(int range) {
+int Simulation::random_number_generator(int range) {
     return rand() % range;
 }
 
 
-Animal& GameStart::random_character_generator(int in_x, int in_y) {
+Animal Simulation::random_character_generator(int in_x, int in_y) {
     int random_number = random_number_generator(4)+2;
     switch (random_number) {
         case (int)Characters::Vegetation:
@@ -95,7 +97,7 @@ Animal& GameStart::random_character_generator(int in_x, int in_y) {
     }
 }
 
-void GameStart::display_counter() {
+void Simulation::display_counter() {
     int T_counter=0;
     int H_counter=0;
     int C_counter=0;
@@ -125,9 +127,9 @@ void GameStart::display_counter() {
 }
 
 //wen yi wen?
-void GameStart::interaction(int next_x, int next_y, int pre_x, int pre_y) {
+void Simulation::interaction(int next_x, int next_y, int pre_x, int pre_y) {
     Animal* next_animal;
-    SinglyLinkedList& list = initializedBoard->getList();
+    SinglyLinkedList list = initializedBoard->getList();
     Animal* pre_animal = list.getByXY(pre_x,pre_y)->getData();
     if(initializedBoard->getXY(next_x,next_y)){
         next_animal = list.getByXY(next_x,next_y)->getData();
@@ -153,15 +155,19 @@ void GameStart::interaction(int next_x, int next_y, int pre_x, int pre_y) {
     }
 }
 
-void GameStart::loss_HP_due_to_being_consumed(Animal *animal) {
+void Simulation::loss_HP_due_to_being_consumed(Animal *animal) {
         animal->setHp(animal->getHp()-10);
 }
 
-void GameStart::loss_HP_due_to_hunger(Animal* animal) {
+void Simulation::loss_HP_due_to_hunger(Animal* animal) {
     animal->setHp(animal->getHp()-1);
 }
 
-void GameStart::remove_animals_with_no_HP() {
+void Simulation::get_HP_due_to_consuming(Animal *animal) {
+    animal->setHp(animal->getHp()+10);
+}
+
+void Simulation::remove_animals_with_no_HP() {
     Node* prev = nullptr;
     Node* curr = initializedBoard->getList().getHead();
 
@@ -184,8 +190,16 @@ void GameStart::remove_animals_with_no_HP() {
     }
 }
 
-void GameStart::get_HP_due_to_consuming(Animal *animal) {
-    animal->setHp(animal->getHp()+10);
+void Simulation::reproduction(Animal* animal) {
+    double FR = animal->getFr();
+
+    if(animal->getCharacter()==(int) Characters::Vegetation){
+        if(initializedBoard->placeAt(*new Vegetation(1,1))){
+
+        }
+    }
+
+
 }
 
 

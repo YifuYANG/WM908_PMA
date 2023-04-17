@@ -1,4 +1,4 @@
-#include "Components/GameStart.h"
+#include "Components/Simulation.h"
 #include "Container/SinglyLinkedList.h"
 #include "Components/Characters/Carnivore.h"
 #include <random>
@@ -8,7 +8,7 @@ using namespace std;
 int main() {
     std::srand(time(nullptr));
 //    for(int i=0;i<10000;i++){
-//        GameStart gameStart;
+//        Simulation gameStart;
 //        gameStart.InitializeBoard().
 //                place_random_characters_at_random_locations_on_the_board().
 //                display().
@@ -18,13 +18,13 @@ int main() {
 //                display();
 //    }
 
-    GameStart gameStart;
-    gameStart.InitializeBoard().
+    Simulation simulation;
+    simulation.InitializeBoard().
             place_random_characters_at_random_locations_on_the_board().
             display();
 
-    for(int i=0;i<100;i++){
-        gameStart.move_oneRound().
+    for(int i=0;i<1;i++){
+        simulation.move_oneRound().
                 display();
     }
 

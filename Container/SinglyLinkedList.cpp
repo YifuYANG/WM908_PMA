@@ -34,7 +34,8 @@ void SinglyLinkedList::printList() {
     while (temp != nullptr) {
         cout << temp->getData()->getX() << " X " << temp->getData()->getY();
         cout<<" character: "<<temp->getData()->getCharacter();
-        cout<<" HP: "<<temp->getData()->getHp()<<endl;
+        cout<<" HP: "<<temp->getData()->getHp();
+        cout<<" FR: "<<temp->getData()->getFr()<<endl;
         temp = temp->getNext();
     }
 }

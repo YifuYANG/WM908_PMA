@@ -10,9 +10,8 @@ protected:
     int X, Y;
     int character;
     int HP;
+    double FR;
 private:
-
-    double rand_double_generator();
 
     double probability_generator_for_not_moving();
 
@@ -21,6 +20,8 @@ private:
     Direction rand_direction_generator();
 
 public:
+
+    double rand_double_generator();
 
     Animal();
 
@@ -45,6 +46,8 @@ public:
     int getHp();
 
     void setHp(int hp);
+
+    double getFr();
 };
 
 

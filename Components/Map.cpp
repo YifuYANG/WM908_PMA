@@ -37,7 +37,6 @@ void Map::display() {
     for (int i = 0; i < y; i++) {
         // Display the horizontal lines between rows
         cout << string(x * 4, '-') << "-" << endl;
-
         // Display the contents of each cell in the current row
         for (int j = 0; j < x; j++) {
             cout << "|" << DISPLAY[this->board[i][j]];

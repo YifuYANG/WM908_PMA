@@ -89,3 +89,7 @@ int Animal::getHp() {
 void Animal::setHp(int hp) {
     HP = hp;
 }
+
+double Animal::getFr() {
+    return FR;
+}

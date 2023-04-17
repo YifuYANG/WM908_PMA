@@ -14,4 +14,5 @@ Vegetation::Vegetation(int x, int y) : Animal(x, y) {
     HP = rand() % 101;
     character = (int) Characters::Vegetation;
     MP = 0;
+    FR = rand_double_generator();
 }

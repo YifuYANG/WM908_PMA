@@ -1,10 +1,10 @@
-#ifndef PMA_GAMESTART_H
-#define PMA_GAMESTART_H
+#ifndef PMA_SIMULATION_H
+#define PMA_SIMULATION_H
 #include "Map.h"
 #include "Characters/Carnivore.h"
 
 
-class GameStart {
+class Simulation {
 private:
     Node* head;
 
@@ -14,7 +14,7 @@ private:
 
     int random_number_generator(int range);
 
-    Animal& random_character_generator(int in_x, int in_y);
+    Animal random_character_generator(int in_x, int in_y);
 
     void display_counter();
 
@@ -28,17 +28,19 @@ private:
 
     void remove_animals_with_no_HP();
 
+    void reproduction(Animal* animal);
+
 public:
-    GameStart();
+    Simulation();
 
-    GameStart & InitializeBoard();
+    Simulation & InitializeBoard();
 
-    GameStart & display();
+    Simulation & display();
 
-    GameStart & place_random_characters_at_random_locations_on_the_board();
+    Simulation & place_random_characters_at_random_locations_on_the_board();
 
-    GameStart & move_oneRound();
+    Simulation & move_oneRound();
 };
 
 
-#endif //PMA_GAMESTART_H
+#endif //PMA_SIMULATION_H

@@ -31,7 +31,6 @@ public:
 
     int **board;
 
-
     Map(int x, int y);
 
     ~Map();
