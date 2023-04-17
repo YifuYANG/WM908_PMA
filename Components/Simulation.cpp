@@ -26,7 +26,7 @@ Simulation& Simulation::move_oneRound() {
     while (temp!= nullptr){
         //wen yi wen
         Animal* animal = temp->getData();
-        reproduction(animal);
+
         if(animal->getCharacter()==(int) Characters::Vegetation){
             temp=temp->getNext();
             continue;
@@ -47,6 +47,7 @@ Simulation& Simulation::move_oneRound() {
             animal->setY(y);
             interaction(next_x,next_y,x,y);
         }
+        reproduction(animal);
 //        cout<<"New HP: "<<temp->getData()->getHp()<<endl;
 //        cout<<"+++++++++++++++"<<endl;
         temp=temp->getNext();
@@ -56,7 +57,7 @@ Simulation& Simulation::move_oneRound() {
 }
 
 Simulation & Simulation::place_random_characters_at_random_locations_on_the_board() {
-    for(int i=0;i<15; i++){
+    for(int i=0;i<1; i++){
         int rand_X;
         int rand_Y;
         Animal rand_an;
@@ -195,13 +196,18 @@ void Simulation::reproduction(Animal* animal) {
     random_device rd;
     mt19937 gen(rd());
     uniform_real_distribution<> dis(0, 1);
-    if(dis(gen) < FR){
+    double per= dis(gen);
+    cout<<"P: "<< per<<endl;
+    cout<<"FR: "<<FR<<endl;
+    cout<<"+++++++++"<<endl;
+    if(per < FR){
         Animal offspring = determine_parent_and_generator_offspring(animal);
-        do{
-            random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(&offspring);
+        if(determine_if_there_are_spaces_for_reproduction(animal->getX(),animal->getY())){
+            do{
+                random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(&offspring);
+            } while(!initializedBoard->placeAt(offspring));
+            initializedBoard->store_animals_to_container(offspring.getCharacter(),offspring.getX(),offspring.getY());
         }
-        while(!initializedBoard->placeAt(offspring));
-        initializedBoard->board[offspring.getX()][offspring.getY()]=offspring.getCharacter();
     }
 }
 
@@ -234,6 +240,17 @@ Animal Simulation::determine_parent_and_generator_offspring(Animal *animal) {
             return *new Omnivore(animal->getX(),animal->getY());
         default:
             break;
+    }
+}
+
+bool Simulation:: determine_if_there_are_spaces_for_reproduction(int x,int y){
+    if(! (initializedBoard->placeAt(*new Animal(x-1,y))
+       || initializedBoard->placeAt(*new Animal(x+1,y))
+       || initializedBoard->placeAt(*new Animal(x,y-1))
+       || initializedBoard->placeAt(*new Animal(x,y+1)))){
+        return false;
+    } else {
+        return true;
     }
 }
 
