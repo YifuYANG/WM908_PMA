@@ -56,3 +56,11 @@ Node* SinglyLinkedList::getByXY(int x, int y) {
 Node *SinglyLinkedList::getHead() {
     return head;
 }
+
+void SinglyLinkedList::setHead(Node *head) {
+    SinglyLinkedList::head = head;
+}
+
+void SinglyLinkedList::setSize(int size) {
+    SinglyLinkedList::size = size;
+}

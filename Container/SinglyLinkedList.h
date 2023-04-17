@@ -17,9 +17,13 @@ public:
 
     Node* getHead();
 
+    void setHead(Node *head);
+
     void printList();
 
     Node* getByXY(int x, int y);
+
+    void setSize(int size);
 };
 
 

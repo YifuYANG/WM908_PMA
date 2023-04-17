@@ -151,14 +151,25 @@ void GameStart::loss_HP_due_to_hunger(Animal* animal) {
 }
 
 void GameStart::remove_animals_with_no_HP() {
-    head = initializedBoard->getList().getHead();
-    Node* temp = head;
-    while (temp!= nullptr){
-        if(temp->getNext()->getData()->getHp()<=0){
-            initializedBoard->board[temp->getNext()->getData()->getX()][temp->getNext()->getData()->getY()]=0;
-            temp->setNext(temp->getNext()->getNext());
+    Node* prev = nullptr;
+    Node* curr = initializedBoard->getList().getHead();
+
+    while (curr != nullptr) {
+        if (curr->getData()->getHp() <= 0) {
+            initializedBoard->board[curr->getData()->getX()][curr->getData()->getY()] = 0;
+            if (prev != nullptr) {
+                prev->setNext(curr->getNext());
+            } else {
+                initializedBoard->getList().setHead(curr->getNext());
+            }
+            Node* temp = curr;
+            curr = curr->getNext();
+            delete temp;
+            initializedBoard->getList().setSize(initializedBoard->getList().GetSize()-1);
+        } else {
+            prev = curr;
+            curr = curr->getNext();
         }
-        temp = temp->getNext();
     }
 }
 
