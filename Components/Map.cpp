@@ -67,12 +67,6 @@ bool Map::placeAt(Animal animal) {
     if (!check_boundary(X, Y) || check_collision(X, Y)) {
         return false;
     }
-
-    if(!list.checkByIndex(index)){
-        store_animals_to_container(animal);
-    } else {
-        list.getByIndex(index)->getData()->setWhetherThisAnimalHasMovedOrNot(true);
-    }
     board[X][Y] = character;
     return true;
 }
@@ -100,19 +94,19 @@ int Map::getY() const {
     return y;
 }
 
-void Map::store_animals_to_container(Animal animal) {
-    switch (animal.getCharacter()) {
+void Map::store_animals_to_container(int character, int in_x, int in_y) {
+    switch (character) {
         case 2:
-            list.Insert(new Vegetation(animal.getX(), animal.getY(), index));
+            list.Insert(new Vegetation(in_x, in_y));
             break;
         case 3:
-            list.Insert(new Herbivore(animal.getX(), animal.getY(), index));
+            list.Insert(new Herbivore(in_x, in_y));
             break;
         case 4:
-            list.Insert(new Carnivore(animal.getX(), animal.getY(), index));
+            list.Insert(new Carnivore(in_x, in_y));
             break;
         case 5:
-            list.Insert(new Omnivore(animal.getX(), animal.getY(), index));
+            list.Insert(new Omnivore(in_x, in_y));
             break;
         default:
             return;

@@ -20,28 +20,31 @@ GameStart &GameStart::display() {
 }
 
 GameStart& GameStart::move_oneRound() {
-    for (int i = 1; i <= initializedBoard->getList().GetSize(); i++) {
-        Animal& animal = *initializedBoard->getList().getByIndex(i)->getData();
-        if(animal.getCharacter()==(int) Characters::Vegetation) continue;
-        int x = animal.getX();
-        int y = animal.getY();
-        cout<<"Old XY: "<<x<<" X "<<y<<endl;
-        animal.move();
-        cout<<"New XY: "<<animal.getX()<<" X "<<animal.getY()<<endl;
-        if (!animal.isWhetherThisAnimalHasMovedOrNot()) {
-            if (initializedBoard->placeAt(animal)) {
-                initializedBoard->board[x][y]=0;
-                animal.setHp(animal.getHp()-1);
-            } else {
-                int next_x=animal.getX();
-                int next_y=animal.getY();
-                animal.setX(x);
-                animal.setY(y);
-                interaction(next_x,next_y,x,y);
-            }
+    Node* head = initializedBoard->getList().getHead();
+    Node* temp = head;
+    while (temp->getNext()!= nullptr){
+        Animal* animal = temp->getData();
+        if(animal->getCharacter()==(int) Characters::Vegetation){
+            temp=temp->getNext();
+            continue;
         }
+        int x = animal->getX();
+        int y = animal->getY();
+        cout<<"Old XY: "<<temp->getData()->getX()<<" X "<<temp->getData()->getY()<<endl;
+        animal->move();
+        cout<<"NEW XY: "<<temp->getData()->getX()<<" X "<<temp->getData()->getY()<<endl;
+        if (initializedBoard->placeAt(*animal)) {
+            initializedBoard->board[x][y]=0;
+            animal->setHp(animal->getHp()-1);
+        } else {
+            int next_x=animal->getX();
+            int next_y=animal->getY();
+            animal->setX(x);
+            animal->setY(y);
+            interaction(next_x,next_y,x,y);
+        }
+        temp=temp->getNext();
     }
-    set_all_animal_to_has_not_moved();
     //remove_animals_with_no_HP();
     return *this;
 }
@@ -50,10 +53,13 @@ GameStart & GameStart::place_random_characters_at_random_locations_on_the_board(
     for(int i=0;i<15; i++){
         int rand_X;
         int rand_Y;
+        Animal rand_an;
         do{
             rand_X = random_number_generator(initializedBoard->getY());
             rand_Y = random_number_generator(initializedBoard->getX());
-        } while(!initializedBoard->placeAt(random_character_generator(rand_X,rand_Y)));
+            rand_an = random_character_generator(rand_X,rand_Y);
+        } while(!initializedBoard->placeAt(rand_an));
+        initializedBoard->store_animals_to_container(rand_an.getCharacter(),rand_X,rand_Y);
     }
     return *this;
 }
@@ -68,12 +74,6 @@ int GameStart::random_number_generator(int range) {
     return rand() % range;
 }
 
-void GameStart::set_all_animal_to_has_not_moved() {
-    SinglyLinkedList& list=this->initializedBoard->getList();
-    for(int i=1;i<=list.GetSize();i++){
-        list.getByIndex(i)->getData()->setWhetherThisAnimalHasMovedOrNot(false);
-    }
-}
 
 Animal& GameStart::random_character_generator(int in_x, int in_y) {
     int random_number = random_number_generator(4)+2;
@@ -96,19 +96,20 @@ void GameStart::display_counter() {
     int H_counter=0;
     int C_counter=0;
     int O_counter=0;
-
-    SinglyLinkedList& list = initializedBoard->getList();
-    for(int i=1;i<=list.GetSize();i++){
-        int character=list.getByIndex(i)->getData()->getCharacter();
-        if(character == 2){
+    Node* head = initializedBoard->getList().getHead();
+    Node* temp = head;
+    while (temp->getNext()!= nullptr){
+        int character=temp->getData()->getCharacter();
+        if(character == (int) Characters::Vegetation){
             T_counter++;
-        } else if (character == 3){
+        } else if (character == (int) Characters::Herbivore){
             H_counter++;
-        } else if(character == 4){
+        } else if(character == (int) Characters::Carnivore){
             C_counter++;
-        } else {
+        } else if(character == (int) Characters::Omnivore){
             O_counter++;
         }
+        temp=temp->getNext();
     }
     number_of_steps++;
     if(number_of_steps==0){

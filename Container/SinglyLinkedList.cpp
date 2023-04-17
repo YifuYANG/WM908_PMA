@@ -31,16 +31,17 @@ void SinglyLinkedList::DeleteByXY(int x, int y) {
     if(head->getData()->getX()==x && head->getData()->getX()==y){
         head=head->getNext();
         Node* temp = head;
+        size--;
         while (temp != nullptr) {
             temp->getData()->setIndex(temp->getData()->getIndex()-1);
             temp = temp->getNext();
         }
-        size--;
     }
     Node* temp = head;
     while (temp->getNext()!= nullptr){
         if(temp->getNext()->getData()->getX()==x && temp->getNext()->getData()->getY()==y){
             temp->setNext(temp->getNext()->getNext());
+            cout<<"So=izeO:: "<<size<<endl;
             size--;
             temp=temp->getNext();
             while (temp != nullptr) {
@@ -105,4 +106,8 @@ Node* SinglyLinkedList::getByXY(int x, int y) {
 
     cout << "XY not found: " <<x<<" X "<<y<<endl;
     return nullptr;
+}
+
+Node *SinglyLinkedList::getHead() {
+    return head;
 }

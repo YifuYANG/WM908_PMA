@@ -25,7 +25,6 @@ private :
 
     bool check_boundary(int input_X, int input_Y);
 
-    void store_animals_to_container(Animal animal);
 
     void place_blocks();
 public:
@@ -48,6 +47,8 @@ public:
     int getY() const;
 
     SinglyLinkedList &getList();
+
+    void store_animals_to_container(int character, int x, int y);
 };
 
 

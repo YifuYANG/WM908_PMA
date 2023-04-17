@@ -17,6 +17,8 @@ public:
 
     void DeleteByXY(int x, int y);
 
+    Node* getHead();
+
     void printList();
 
     Node* getByXY(int x, int y);
