@@ -50,7 +50,7 @@ GameStart& GameStart::move_oneRound() {
 }
 
 GameStart & GameStart::place_random_characters_at_random_locations_on_the_board() {
-    for(int i=0;i<15; i++){
+    for(int i=0;i<30; i++){
         int rand_X;
         int rand_Y;
         Animal rand_an;
