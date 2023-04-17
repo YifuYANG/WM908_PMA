@@ -96,10 +96,11 @@ void GameStart::display_counter() {
     int H_counter=0;
     int C_counter=0;
     int O_counter=0;
+    int i=1;
     head = initializedBoard->getList().getHead();
     Node* temp = head;
     while (temp->getNext()!= nullptr){
-        int character=temp->getData()->getCharacter();
+        int character = temp->getData()->getCharacter();
         if(character == (int) Characters::Vegetation){
             T_counter++;
         } else if (character == (int) Characters::Herbivore){
@@ -109,6 +110,7 @@ void GameStart::display_counter() {
         } else if(character == (int) Characters::Omnivore){
             O_counter++;
         }
+        i++;
         temp=temp->getNext();
     }
     number_of_steps++;

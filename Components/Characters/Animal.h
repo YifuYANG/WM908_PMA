@@ -12,8 +12,6 @@ protected:
     int HP;
 private:
 
-    bool whether_this_animal_has_moved_or_not;
-
     double rand_double_generator();
 
     double probability_generator_for_not_moving();
@@ -23,7 +21,6 @@ private:
     Direction rand_direction_generator();
 
 public:
-    bool isWhetherThisAnimalHasMovedOrNot();
 
     Animal();
 
@@ -38,9 +35,6 @@ public:
 
 
     int getCharacter();
-
-    void setWhetherThisAnimalHasMovedOrNot(bool whetherThisAnimalHasMovedOrNot);
-
 
     Animal(int x, int y);
 

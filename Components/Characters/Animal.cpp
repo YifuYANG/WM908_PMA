@@ -25,7 +25,6 @@ double Animal::rand_double_generator() {
 }
 
 Animal::Animal() {
-    whether_this_animal_has_moved_or_not=false;
 }
 
 double Animal::probability_generator_for_not_moving() {
@@ -36,9 +35,6 @@ double Animal::probability_generator_for_moving() {
     return (1-probability_generator_for_not_moving())/4;
 }
 
-bool Animal::isWhetherThisAnimalHasMovedOrNot(){
-    return whether_this_animal_has_moved_or_not;
-}
 
 int Animal::getMp(){
     return MP;
@@ -70,10 +66,6 @@ void Animal::move() {
 
 int Animal::getCharacter() {
     return character;
-}
-
-void Animal::setWhetherThisAnimalHasMovedOrNot(bool whetherThisAnimalHasMovedOrNot) {
-    whether_this_animal_has_moved_or_not = whetherThisAnimalHasMovedOrNot;
 }
 
 
