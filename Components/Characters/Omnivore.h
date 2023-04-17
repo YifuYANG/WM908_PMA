@@ -8,7 +8,6 @@ class Omnivore : public Animal {
 public:
     Omnivore();
 
-    Omnivore(int x, int y, int index);
 
     Omnivore(int x, int y);
 };

@@ -44,11 +44,6 @@ int Animal::getMp(){
     return MP;
 }
 
-Animal::Animal(int x, int y, int index) {
-    this->X = x;
-    this->Y = y;
-    this->index = index;
-}
 
 int Animal::getX() {
     return X;
@@ -72,9 +67,6 @@ void Animal::move() {
     }
 }
 
-int Animal::getIndex() {
-    return index;
-}
 
 int Animal::getCharacter() {
     return character;
@@ -84,9 +76,6 @@ void Animal::setWhetherThisAnimalHasMovedOrNot(bool whetherThisAnimalHasMovedOrN
     whether_this_animal_has_moved_or_not = whetherThisAnimalHasMovedOrNot;
 }
 
-void Animal::setIndex(int index) {
-    Animal::index = index;
-}
 
 Animal::Animal(int x, int y){
     this->X = x;

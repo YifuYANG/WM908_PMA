@@ -6,6 +6,8 @@
 
 class GameStart {
 private:
+    Node* head;
+
     Map* initializedBoard = nullptr;
 
     int number_of_steps=-1;

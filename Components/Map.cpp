@@ -63,7 +63,6 @@ bool Map::placeAt(Animal animal) {
     int X = animal.getX();
     int Y = animal.getY();
     int character = animal.getCharacter();
-    int index=animal.getIndex();
     if (!check_boundary(X, Y) || check_collision(X, Y)) {
         return false;
     }

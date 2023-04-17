@@ -8,7 +8,6 @@ class Animal {
 protected:
     int MP;
     int X, Y;
-    int index;
     int character;
     int HP;
 private:
@@ -32,19 +31,16 @@ public:
 
     void move();
 
-    Animal(int x, int y, int index);
 
     int getX();
 
     int getY();
 
-    int getIndex();
 
     int getCharacter();
 
     void setWhetherThisAnimalHasMovedOrNot(bool whetherThisAnimalHasMovedOrNot);
 
-    void setIndex(int index);
 
     Animal(int x, int y);
 

@@ -22,10 +22,7 @@ public:
     void printList();
 
     Node* getByXY(int x, int y);
-
-    Node* getByIndex(int index);
-
-    bool checkByIndex(int index);
+    
 };
 
 

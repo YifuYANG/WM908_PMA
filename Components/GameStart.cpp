@@ -20,7 +20,7 @@ GameStart &GameStart::display() {
 }
 
 GameStart& GameStart::move_oneRound() {
-    Node* head = initializedBoard->getList().getHead();
+    head = initializedBoard->getList().getHead();
     Node* temp = head;
     while (temp->getNext()!= nullptr){
         Animal* animal = temp->getData();
@@ -30,9 +30,9 @@ GameStart& GameStart::move_oneRound() {
         }
         int x = animal->getX();
         int y = animal->getY();
-        cout<<"Old XY: "<<temp->getData()->getX()<<" X "<<temp->getData()->getY()<<endl;
+        //cout<<"Old XY: "<<temp->getData()->getX()<<" X "<<temp->getData()->getY()<<endl;
         animal->move();
-        cout<<"NEW XY: "<<temp->getData()->getX()<<" X "<<temp->getData()->getY()<<endl;
+        //cout<<"NEW XY: "<<temp->getData()->getX()<<" X "<<temp->getData()->getY()<<endl;
         if (initializedBoard->placeAt(*animal)) {
             initializedBoard->board[x][y]=0;
             animal->setHp(animal->getHp()-1);
@@ -78,13 +78,13 @@ int GameStart::random_number_generator(int range) {
 Animal& GameStart::random_character_generator(int in_x, int in_y) {
     int random_number = random_number_generator(4)+2;
     switch (random_number) {
-        case 2:
+        case (int)Characters::Vegetation:
             return *new Vegetation(in_x, in_y);
-        case 3:
+        case (int)Characters::Herbivore:
             return *new Herbivore(in_x, in_y);
-        case 4:
+        case (int)Characters::Carnivore:
             return *new Carnivore(in_x, in_y);
-        case 5:
+        case (int)Characters::Omnivore:
             return *new Omnivore(in_x, in_y);
         default:
             break;
@@ -96,7 +96,7 @@ void GameStart::display_counter() {
     int H_counter=0;
     int C_counter=0;
     int O_counter=0;
-    Node* head = initializedBoard->getList().getHead();
+    head = initializedBoard->getList().getHead();
     Node* temp = head;
     while (temp->getNext()!= nullptr){
         int character=temp->getData()->getCharacter();
@@ -152,12 +152,12 @@ void GameStart::loss_HP_due_to_hunger(Animal* animal) {
 
 void GameStart::remove_animals_with_no_HP() {
     SinglyLinkedList& list = initializedBoard->getList();
-    for(int i=1;i<=list.GetSize();i++){
-        if(list.getByIndex(i)->getData()->getHp()<=0){
-            list.DeleteByXY(list.getByIndex(i)->getData()->getX(),list.getByIndex(i)->getData()->getY());
-            initializedBoard->board[list.getByIndex(i)->getData()->getX()][list.getByIndex(i)->getData()->getY()]=0;
-        }
-    }
+//    for(int i=1;i<=list.GetSize();i++){
+//        if(list.getByIndex(i)->getData()->getHp()<=0){
+//            list.DeleteByXY(list.getByIndex(i)->getData()->getX(),list.getByIndex(i)->getData()->getY());
+//            initializedBoard->board[list.getByIndex(i)->getData()->getX()][list.getByIndex(i)->getData()->getY()]=0;
+//        }
+//    }
 }
 
 

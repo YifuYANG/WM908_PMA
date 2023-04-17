@@ -24,35 +24,35 @@ int SinglyLinkedList::GetSize() {
 }
 
 void SinglyLinkedList::DeleteByXY(int x, int y) {
-    if(head==nullptr){
-        cout << "List empty." << endl;
-        return;
-    }
-    if(head->getData()->getX()==x && head->getData()->getX()==y){
-        head=head->getNext();
-        Node* temp = head;
-        size--;
-        while (temp != nullptr) {
-            temp->getData()->setIndex(temp->getData()->getIndex()-1);
-            temp = temp->getNext();
-        }
-    }
-    Node* temp = head;
-    while (temp->getNext()!= nullptr){
-        if(temp->getNext()->getData()->getX()==x && temp->getNext()->getData()->getY()==y){
-            temp->setNext(temp->getNext()->getNext());
-            cout<<"So=izeO:: "<<size<<endl;
-            size--;
-            temp=temp->getNext();
-            while (temp != nullptr) {
-                temp->getData()->setIndex(temp->getData()->getIndex()-1);
-                temp = temp->getNext();
-            }
-            return;
-        } else {
-            temp=temp->getNext();
-        }
-    }
+//    if(head==nullptr){
+//        cout << "List empty." << endl;
+//        return;
+//    }
+//    if(head->getData()->getX()==x && head->getData()->getX()==y){
+//        head=head->getNext();
+//        Node* temp = head;
+//        size--;
+//        while (temp != nullptr) {
+//            temp->getData()->setIndex(temp->getData()->getIndex()-1);
+//            temp = temp->getNext();
+//        }
+//    }
+//    Node* temp = head;
+//    while (temp->getNext()!= nullptr){
+//        if(temp->getNext()->getData()->getX()==x && temp->getNext()->getData()->getY()==y){
+//            temp->setNext(temp->getNext()->getNext());
+//            cout<<"So=izeO:: "<<size<<endl;
+//            size--;
+//            temp=temp->getNext();
+//            while (temp != nullptr) {
+//                temp->getData()->setIndex(temp->getData()->getIndex()-1);
+//                temp = temp->getNext();
+//            }
+//            return;
+//        } else {
+//            temp=temp->getNext();
+//        }
+//    }
 }
 
 
@@ -64,7 +64,6 @@ void SinglyLinkedList::printList() {
     }
 
     while (temp != nullptr) {
-        cout <<"Index -> "<< temp->getData()->getIndex()<<" holds ->";
         cout << temp->getData()->getX() << " X " << temp->getData()->getY();
         cout<<" character: "<<temp->getData()->getCharacter();
         cout<<" HP: "<<temp->getData()->getHp()<<endl;
@@ -72,28 +71,6 @@ void SinglyLinkedList::printList() {
     }
 }
 
-Node *SinglyLinkedList::getByIndex(int index) {
-    Node* temp = head;
-    while (temp != nullptr) {
-        if (temp->getData()->getIndex() == index) {
-            return temp;
-        }
-        temp = temp->getNext();
-    }
-    cout << "Index not found" << endl;
-    return nullptr;
-}
-
-bool SinglyLinkedList::checkByIndex(int index) {
-    Node* temp = head;
-    while (temp != nullptr) {
-        if (temp->getData()->getIndex() == index) {
-            return true;
-        }
-        temp = temp->getNext();
-    }
-    return false;
-}
 
 Node* SinglyLinkedList::getByXY(int x, int y) {
     Node* temp = head;
