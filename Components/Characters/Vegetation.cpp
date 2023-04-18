@@ -1,8 +1,10 @@
 #include "Vegetation.h"
 
 Vegetation::Vegetation() {
-    HP = rand() % 101;
-    MP = 0;
+    HP = settings.T_HP;
+    character = (int) Characters::Vegetation;
+    MP = settings.T_MP;
+    FR = settings.FR_T;
 }
 
 Direction Vegetation::move() {
@@ -11,9 +13,8 @@ Direction Vegetation::move() {
 
 
 Vegetation::Vegetation(int x, int y) : Animal(x, y) {
-    HP = 100;
+    HP = settings.T_HP;
     character = (int) Characters::Vegetation;
-    MP = 0;
-    FR = 0.03;
-            //rand_double_generator();
+    MP = settings.T_MP;
+    FR = settings.FR_T;
 }

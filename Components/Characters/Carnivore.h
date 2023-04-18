@@ -2,11 +2,14 @@
 #define PMA_CARNIVORE_H
 #include "../Enum/Characters.h"
 #include <random>
+#include "../../Settings/Settings.h"
 using namespace std;
 
 #include "Animal.h"
 
 class Carnivore : public Animal{
+private:
+    Settings setting;
 public:
     Carnivore();
 

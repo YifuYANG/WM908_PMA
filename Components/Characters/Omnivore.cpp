@@ -2,14 +2,15 @@
 
 
 Omnivore::Omnivore() {
-    HP = 50;
-    MP = 8;
+    HP = settings.O_HP;
+    character = (int) Characters::Omnivore;
+    MP = settings.O_MP;
+    FR = settings.FR_O;
 }
 
 Omnivore::Omnivore(int x, int y) : Animal(x, y) {
-    HP = 50;
+    HP = settings.O_HP;
     character = (int) Characters::Omnivore;
-    MP = 8;
-    FR = 0.03;
-            //rand_double_generator();
+    MP = settings.O_MP;
+    FR = settings.FR_O;
 }

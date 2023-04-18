@@ -2,15 +2,16 @@
 
 
 Herbivore::Herbivore() {
-    HP = 50;
-    MP = 5;
+    HP = settings.H_HP;
+    character = (int) Characters::Herbivore;
+    MP = settings.H_MP;
+    FR = settings.FR_H;
 }
 
 
 Herbivore::Herbivore(int x, int y) : Animal(x, y) {
-    HP = 50;
+    HP = settings.H_HP;
     character = (int) Characters::Herbivore;
-    MP = 5;
-    FR = 0.03;
-            //rand_double_generator();
+    MP = settings.H_MP;
+    FR = settings.FR_H;
 }

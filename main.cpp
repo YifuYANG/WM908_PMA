@@ -1,32 +1,48 @@
 #include "Components/Simulation.h"
-#include "Container/SinglyLinkedList.h"
-#include "Components/Characters/Carnivore.h"
 #include <random>
-#include "iostream"
 using namespace std;
 
 int main() {
-    std::srand(time(nullptr));
-//    for(int i=0;i<100000;i++){
-//        Simulation gameStart;
-//        gameStart.InitializeBoard().
-//                place_random_characters_at_random_locations_on_the_board().
-//                display().
-//                move_oneRound().
-//                move_oneRound().
-//                move_oneRound().
-//                display();
+//    for(int i=0;i<100;i++){
+//        std::srand(time(nullptr));
+//        Simulation simulation;
+//        simulation.InitializeBoard().
+//                place_random_characters_at_random_locations_on_the_board();
+//
+//        for(int j=0;j<1000;j++){
+//            simulation.move_oneRound().
+//                    reproduction().
+//                    count_average_character();
+//        }
+//        cout<<"Step: "<<i+1<<endl;
+//        cout<<"Average T over 1000 steps: "<<simulation.T_total/1000<<endl;
+//        cout<<"Average H over 1000 steps: "<<simulation.H_total/1000<<endl;
+//        cout<<"Average C over 1000 steps: "<<simulation.C_total/1000<<endl;
+//        cout<<"Average O over 1000 steps: "<<simulation.O_total/1000<<endl;
+//        cout<<"===================================="<<endl;
+//    }
+//    while(true){
+//        string input;
+//        cout << "Type anything to continue or q to quit: ";
+//        cin >>input;
+//        if(input!="q"){
+//            simulation.move_oneRound().
+//            reproduction().
+//            display();
+//        } else {
+//            cout <<"Program killed by user"<<endl;
+//            break;
+//        }
 //    }
 
-    Simulation simulation;
-    simulation.InitializeBoard().
-            place_random_characters_at_random_locations_on_the_board().
-            display();
-
-    for(int i=0;i<100;i++){
-        simulation.move_oneRound().
+        std::srand(time(nullptr));
+        Simulation simulation;
+        simulation.InitializeBoard().
+                place_random_characters_at_random_locations_on_the_board().
+                display();
+        for(int j=0;j<1000;j++){
+            simulation.move_oneRound().
                     reproduction().
                     display();
-    }
-
+        }
 }

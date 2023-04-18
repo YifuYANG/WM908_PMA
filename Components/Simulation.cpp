@@ -5,7 +5,7 @@ Simulation::Simulation() = default;
 
 
 Simulation &Simulation::InitializeBoard() {
-    this->initializedBoard = new Map(14,14);
+    this->initializedBoard = new Map(settings.X,settings.Y);
     return *this;
 }
 
@@ -16,7 +16,6 @@ Simulation &Simulation::display() {
     }
     //display counter
     display_counter();
-//    initializedBoard->getList().printList();
     return *this;
 }
 
@@ -50,17 +49,10 @@ Simulation& Simulation::move_oneRound() {
 }
 
 Simulation & Simulation::place_random_characters_at_random_locations_on_the_board() {
-    for(int i=0;i<70; i++){
-        int rand_X;
-        int rand_Y;
-        Animal rand_an;
-        do{
-            rand_X = random_number_generator(initializedBoard->getY());
-            rand_Y = random_number_generator(initializedBoard->getX());
-            rand_an = random_character_generator(rand_X,rand_Y);
-        } while(!initializedBoard->placeAt(rand_an));
-        initializedBoard->store_animals_to_container(rand_an.getCharacter(),rand_X,rand_Y);
-    }
+    place_random_T_at_random_locations_on_the_board(settings.T);
+    place_random_C_at_random_locations_on_the_board(settings.C);
+    place_random_H_at_random_locations_on_the_board(settings.H);
+    place_random_O_at_random_locations_on_the_board(settings.O);
     return *this;
 }
 
@@ -88,6 +80,19 @@ Animal Simulation::random_character_generator(int in_x, int in_y) {
             return *new Omnivore(in_x, in_y);
         default:
             break;
+    }
+}
+
+Animal Simulation::character_generator(int in_x, int in_y, int character) {
+    switch (character) {
+        case (int)Characters::Vegetation:
+            return *new Vegetation(in_x, in_y);
+        case (int)Characters::Herbivore:
+            return *new Herbivore(in_x, in_y);
+        case (int)Characters::Carnivore:
+            return *new Carnivore(in_x, in_y);
+        case (int)Characters::Omnivore:
+            return *new Omnivore(in_x, in_y);
     }
 }
 
@@ -120,7 +125,7 @@ void Simulation::display_counter() {
     cout<< "T: " << T_counter <<" H: "<<H_counter <<" C: "<<C_counter <<" O: "<<O_counter<<"] "<<endl;
 }
 
-//wen yi wen?
+
 void Simulation::interaction(int next_x, int next_y, int pre_x, int pre_y) {
     Animal* next_animal;
     SinglyLinkedList list = initializedBoard->getList();
@@ -164,7 +169,6 @@ void Simulation::get_HP_due_to_consuming(Animal *animal) {
 void Simulation::remove_animals_with_no_HP() {
     Node* prev = nullptr;
     Node* curr = initializedBoard->getList().getHead();
-
     while (curr != nullptr) {
         if (curr->getData()->getHp() <= 0) {
             initializedBoard->board[curr->getData()->getX()][curr->getData()->getY()] = 0;
@@ -256,6 +260,91 @@ bool Simulation:: determine_if_there_are_spaces_for_reproduction(int x,int y){
         return true;
     } else {
         return false;
+    }
+}
+
+Simulation &Simulation::count_average_character() {
+    int T_counter=0;
+    int H_counter=0;
+    int C_counter=0;
+    int O_counter=0;
+    head = initializedBoard->getList().getHead();
+    Node* temp = head;
+    while (temp != nullptr){
+        int character = temp->getData()->getCharacter();
+        if(character == (int) Characters::Vegetation){
+            T_counter++;
+        } else if (character == (int) Characters::Herbivore){
+            H_counter++;
+        } else if(character == (int) Characters::Carnivore){
+            C_counter++;
+        } else if(character == (int) Characters::Omnivore){
+            O_counter++;
+        }
+        temp=temp->getNext();
+    }
+    number_of_steps++;
+
+    T_total+=T_counter;
+    C_total+=C_counter;
+    O_total+=O_counter;
+    H_total+=H_counter;
+    return *this;
+}
+
+void Simulation::place_random_C_at_random_locations_on_the_board(int amount) {
+    for(int i=0;i<amount; i++){
+        int rand_X;
+        int rand_Y;
+        Animal rand_an;
+        do{
+            rand_X = random_number_generator(initializedBoard->getY());
+            rand_Y = random_number_generator(initializedBoard->getX());
+            rand_an = character_generator(rand_X,rand_Y,(int)Characters::Carnivore);
+        } while(!initializedBoard->placeAt(rand_an));
+        initializedBoard->store_animals_to_container(rand_an.getCharacter(),rand_X,rand_Y);
+    }
+}
+
+void Simulation::place_random_T_at_random_locations_on_the_board(int amount) {
+    for(int i=0;i<amount; i++){
+        int rand_X;
+        int rand_Y;
+        Animal rand_an;
+        do{
+            rand_X = random_number_generator(initializedBoard->getY());
+            rand_Y = random_number_generator(initializedBoard->getX());
+            rand_an = character_generator(rand_X,rand_Y,(int)Characters::Vegetation);
+        } while(!initializedBoard->placeAt(rand_an));
+        initializedBoard->store_animals_to_container(rand_an.getCharacter(),rand_X,rand_Y);
+    }
+}
+
+void Simulation::place_random_H_at_random_locations_on_the_board(int amount) {
+    for(int i=0;i<amount; i++){
+        int rand_X;
+        int rand_Y;
+        Animal rand_an;
+        do{
+            rand_X = random_number_generator(initializedBoard->getY());
+            rand_Y = random_number_generator(initializedBoard->getX());
+            rand_an = character_generator(rand_X,rand_Y,(int)Characters::Herbivore);
+        } while(!initializedBoard->placeAt(rand_an));
+        initializedBoard->store_animals_to_container(rand_an.getCharacter(),rand_X,rand_Y);
+    }
+}
+
+void Simulation::place_random_O_at_random_locations_on_the_board(int amount) {
+    for(int i=0;i<amount; i++){
+        int rand_X;
+        int rand_Y;
+        Animal rand_an;
+        do{
+            rand_X = random_number_generator(initializedBoard->getY());
+            rand_Y = random_number_generator(initializedBoard->getX());
+            rand_an = character_generator(rand_X,rand_Y,(int)Characters::Omnivore);
+        } while(!initializedBoard->placeAt(rand_an));
+        initializedBoard->store_animals_to_container(rand_an.getCharacter(),rand_X,rand_Y);
     }
 }
 

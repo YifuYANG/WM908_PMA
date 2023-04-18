@@ -8,9 +8,12 @@
 #include "Characters/Herbivore.h"
 #include "Characters/Carnivore.h"
 #include "Characters/Omnivore.h"
+#include "../Settings/Settings.h"
 using namespace std;
 class Map {
 private :
+    Settings settings;
+
     SinglyLinkedList list;
 
     int x=0,y=0;

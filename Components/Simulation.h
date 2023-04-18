@@ -2,10 +2,13 @@
 #define PMA_SIMULATION_H
 #include "Map.h"
 #include "Characters/Carnivore.h"
+#include"../Settings/Settings.h"
 
 
 class Simulation {
 private:
+    Settings settings;
+
     Node* head;
 
     Map* initializedBoard = nullptr;
@@ -15,6 +18,8 @@ private:
     int random_number_generator(int range);
 
     Animal random_character_generator(int in_x, int in_y);
+
+    Animal character_generator(int in_x, int in_y, int character);
 
     void display_counter();
 
@@ -34,7 +39,20 @@ private:
 
     bool determine_if_there_are_spaces_for_reproduction(int x, int y);
 
+    void place_random_T_at_random_locations_on_the_board(int amount);
+
+    void place_random_H_at_random_locations_on_the_board(int amount);
+
+    void place_random_C_at_random_locations_on_the_board(int amount);
+
+    void place_random_O_at_random_locations_on_the_board(int amount);
+
 public:
+    int T_total=0;
+    int C_total=0;
+    int O_total=0;
+    int H_total=0;
+
     Simulation();
 
     Simulation & InitializeBoard();
@@ -46,6 +64,8 @@ public:
     Simulation & move_oneRound();
 
     Simulation & reproduction();
+
+    Simulation & count_average_character();
 };
 
 

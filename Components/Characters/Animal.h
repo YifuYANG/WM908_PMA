@@ -2,7 +2,6 @@
 #define PMA_ANIMAL_H
 #include "iostream"
 #include "../Enum/Direction.h"
-
 using namespace std;
 class Animal {
 protected:
