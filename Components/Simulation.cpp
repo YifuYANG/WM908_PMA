@@ -194,7 +194,7 @@ Simulation& Simulation::reproduction() {
     while (temp!= nullptr){
         count_character();
         if (temp->getData()->getCharacter() == (int) Characters::Vegetation) {
-            if(T_total < (initializedBoard->getX() * initializedBoard->getY())/5){
+            if(T_total < (initializedBoard->getX() * initializedBoard->getY())/6){
                 place_random_T_at_random_locations_on_the_board(1);
             } else if(T_total >= (initializedBoard->getX() * initializedBoard->getY())/3){
                 temp = temp->getNext();
@@ -206,7 +206,7 @@ Simulation& Simulation::reproduction() {
             H_total=0;
         }
         if(temp->getData()->getCharacter() == (int)Characters::Herbivore){
-            if(H_total < (initializedBoard->getX() * initializedBoard->getY())/5){
+            if(H_total < (initializedBoard->getX() * initializedBoard->getY())/6){
                 place_random_H_at_random_locations_on_the_board(1);
             } else if(H_total >= (initializedBoard->getX() * initializedBoard->getY())/3){
                 temp = temp->getNext();
@@ -219,7 +219,7 @@ Simulation& Simulation::reproduction() {
         }
 
         if(temp->getData()->getCharacter() == (int)Characters::Carnivore){
-            if(C_total < (initializedBoard->getX() * initializedBoard->getY())/5){
+            if(C_total < (initializedBoard->getX() * initializedBoard->getY())/6){
                 place_random_C_at_random_locations_on_the_board(1);
             } else if(C_total >= (initializedBoard->getX() * initializedBoard->getY())/5){
                 temp = temp->getNext();
