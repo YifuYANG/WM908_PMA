@@ -5,7 +5,7 @@ Simulation::Simulation() = default;
 
 
 Simulation &Simulation::InitializeBoard() {
-    this->initializedBoard = new Map(10,7);
+    this->initializedBoard = new Map(14,14);
     return *this;
 }
 
@@ -26,17 +26,13 @@ Simulation& Simulation::move_oneRound() {
     while (temp!= nullptr){
         //wen yi wen
         Animal* animal = temp->getData();
-        reproduction(animal);
         if(animal->getCharacter()==(int) Characters::Vegetation){
             temp=temp->getNext();
             continue;
         }
         int x = animal->getX();
         int y = animal->getY();
-//        cout<<"Old XY: "<<temp->getData()->getX()<<" X "<<temp->getData()->getY()<<endl;
-//        cout<<"Old HP: "<<temp->getData()->getHp()<<endl;
         animal->move();
-//        cout<<"NEW XY: "<<temp->getData()->getX()<<" X "<<temp->getData()->getY()<<endl;
         if (initializedBoard->placeAt(*animal)) {
             initializedBoard->board[x][y]=0;
             loss_HP_due_to_hunger(animal);
@@ -47,8 +43,6 @@ Simulation& Simulation::move_oneRound() {
             animal->setY(y);
             interaction(next_x,next_y,x,y);
         }
-//        cout<<"New HP: "<<temp->getData()->getHp()<<endl;
-//        cout<<"+++++++++++++++"<<endl;
         temp=temp->getNext();
     }
     remove_animals_with_no_HP();
@@ -56,7 +50,7 @@ Simulation& Simulation::move_oneRound() {
 }
 
 Simulation & Simulation::place_random_characters_at_random_locations_on_the_board() {
-    for(int i=0;i<15; i++){
+    for(int i=0;i<70; i++){
         int rand_X;
         int rand_Y;
         Animal rand_an;
@@ -142,7 +136,7 @@ void Simulation::interaction(int next_x, int next_y, int pre_x, int pre_y) {
     if(pre_character == (int) Characters::Herbivore && next_character == (int) Characters::Vegetation){
         get_HP_due_to_consuming(pre_animal);
         loss_HP_due_to_being_consumed(next_animal);
-    } else if(pre_character == (int) Characters::Carnivore && next_character == (int) Characters::Herbivore){
+    } else if(pre_character == (int) Characters::Carnivore && (next_character == (int) Characters::Herbivore || next_character == (int) Characters::Omnivore)){
         get_HP_due_to_consuming(pre_animal);
         loss_HP_due_to_being_consumed(next_animal);
     } else if (pre_character == (int) Characters::Omnivore && (next_character == (int) Characters::Herbivore || next_character == (int) Characters::Vegetation)) {
@@ -190,23 +184,30 @@ void Simulation::remove_animals_with_no_HP() {
     }
 }
 
-void Simulation::reproduction(Animal* animal) {
-    double FR = animal->getFr();
-    random_device rd;
-    mt19937 gen(rd());
-    uniform_real_distribution<> dis(0, 1);
-    double per= dis(gen);
-    if(per < FR){
-        Animal offspring = determine_parent_and_generator_offspring(animal);
-        if(determine_if_there_are_spaces_for_reproduction(animal->getX(),animal->getY())){
-            do{
-                offspring.setX(animal->getX());
-                offspring.setY(animal->getY());
-                random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(&offspring);
-            } while(!initializedBoard->placeAt(offspring));
-            initializedBoard->store_animals_to_container(offspring.getCharacter(),offspring.getX(),offspring.getY());
+Simulation& Simulation::reproduction() {
+    head = initializedBoard->getList().getHead();
+    Node* temp = head;
+    while (temp!= nullptr){
+        Animal* animal = temp->getData();
+        double FR = animal->getFr();
+        random_device rd;
+        mt19937 gen(rd());
+        uniform_real_distribution<> dis(0, 1);
+        double per= dis(gen);
+        if(per < FR){
+            Animal offspring = determine_parent_and_generator_offspring(animal);
+            if(determine_if_there_are_spaces_for_reproduction(animal->getX(),animal->getY())){
+                do{
+                    offspring.setX(animal->getX());
+                    offspring.setY(animal->getY());
+                    random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(&offspring);
+                } while(!initializedBoard->placeAt(offspring));
+                initializedBoard->store_animals_to_container(offspring.getCharacter(),offspring.getX(),offspring.getY());
+            }
         }
+        temp=temp->getNext();
     }
+    return * this;
 }
 
 //random spawn around the parent (four directions).

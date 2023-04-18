@@ -28,8 +28,6 @@ private:
 
     void remove_animals_with_no_HP();
 
-    void reproduction(Animal* animal);
-
     Animal determine_parent_and_generator_offspring(Animal* animal);
 
     void random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(Animal* animal);
@@ -46,6 +44,8 @@ public:
     Simulation & place_random_characters_at_random_locations_on_the_board();
 
     Simulation & move_oneRound();
+
+    Simulation & reproduction();
 };
 
 

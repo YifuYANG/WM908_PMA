@@ -11,8 +11,9 @@ Direction Vegetation::move() {
 
 
 Vegetation::Vegetation(int x, int y) : Animal(x, y) {
-    HP = rand() % 101;
+    HP = 100;
     character = (int) Characters::Vegetation;
     MP = 0;
-    FR = rand_double_generator();
+    FR = 0.03;
+            //rand_double_generator();
 }

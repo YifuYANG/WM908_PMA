@@ -23,9 +23,10 @@ int main() {
             place_random_characters_at_random_locations_on_the_board().
             display();
 
-    for(int i=0;i<10;i++){
+    for(int i=0;i<100;i++){
         simulation.move_oneRound().
-                display();
+                    reproduction().
+                    display();
     }
 
 }
