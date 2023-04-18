@@ -26,7 +26,7 @@ Simulation& Simulation::move_oneRound() {
     while (temp!= nullptr){
         //wen yi wen
         Animal* animal = temp->getData();
-
+        reproduction(animal);
         if(animal->getCharacter()==(int) Characters::Vegetation){
             temp=temp->getNext();
             continue;
@@ -47,7 +47,6 @@ Simulation& Simulation::move_oneRound() {
             animal->setY(y);
             interaction(next_x,next_y,x,y);
         }
-        reproduction(animal);
 //        cout<<"New HP: "<<temp->getData()->getHp()<<endl;
 //        cout<<"+++++++++++++++"<<endl;
         temp=temp->getNext();
@@ -57,7 +56,7 @@ Simulation& Simulation::move_oneRound() {
 }
 
 Simulation & Simulation::place_random_characters_at_random_locations_on_the_board() {
-    for(int i=0;i<1; i++){
+    for(int i=0;i<30; i++){
         int rand_X;
         int rand_Y;
         Animal rand_an;
@@ -204,6 +203,8 @@ void Simulation::reproduction(Animal* animal) {
         Animal offspring = determine_parent_and_generator_offspring(animal);
         if(determine_if_there_are_spaces_for_reproduction(animal->getX(),animal->getY())){
             do{
+                offspring.setX(animal->getX());
+                offspring.setY(animal->getY());
                 random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(&offspring);
             } while(!initializedBoard->placeAt(offspring));
             initializedBoard->store_animals_to_container(offspring.getCharacter(),offspring.getX(),offspring.getY());
@@ -211,22 +212,25 @@ void Simulation::reproduction(Animal* animal) {
     }
 }
 
-//random spawn around the parent (four direction).
-Animal Simulation::random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(Animal* offspring) {
-    int compass = rand() % 4;
-    switch (compass) {
+//random spawn around the parent (four directions).
+void Simulation::random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(Animal* offspring) {
+    int random_point = rand() % 4;
+    switch (random_point) {
         case (int) Direction::South: // Move South (increase x)
             offspring->setX(offspring->getX()+1);
+            break;
         case (int) Direction::North: // Move North (decrease x)
             offspring->setX(offspring->getX()-1);
+            break;
         case (int) Direction::East: // Move East (increase y)
             offspring->setY(offspring->getY()+1);
+            break;
         case (int) Direction::West: // Move West (decrease y)
             offspring->setY(offspring->getY()-1);
+            break;
         default:
             break;
     }
-    return *offspring;
 }
 
 //create offsprings with their parent's characters.

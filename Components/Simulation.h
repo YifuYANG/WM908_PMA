@@ -32,7 +32,7 @@ private:
 
     Animal determine_parent_and_generator_offspring(Animal* animal);
 
-    Animal random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(Animal* animal);
+    void random_select_spawn_point_in_one_of_the_four_cardinal_compass_points(Animal* animal);
 
     bool determine_if_there_are_spaces_for_reproduction(int x, int y);
 
