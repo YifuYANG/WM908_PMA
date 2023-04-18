@@ -25,6 +25,11 @@ int main() {
 //    }
 
 
+//    std::srand(time(nullptr));
+//    Simulation simulation;
+//    simulation.InitializeBoard().
+//        place_random_characters_at_random_locations_on_the_board().
+//        display();
 //    while(true){
 //        string input;
 //        cout << "Type anything to continue or q to quit: ";

@@ -65,7 +65,7 @@ public:
 
     Simulation & reproduction();
 
-    Simulation & count_average_character();
+    Simulation & count_character();
 };
 
 
