@@ -17,8 +17,6 @@ private:
 
     int random_number_generator(int range);
 
-    Animal random_character_generator(int in_x, int in_y);
-
     Animal character_generator(int in_x, int in_y, int character);
 
     void display_counter();

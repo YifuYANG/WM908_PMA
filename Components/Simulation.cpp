@@ -67,22 +67,6 @@ int Simulation::random_number_generator(int range) {
 }
 
 
-Animal Simulation::random_character_generator(int in_x, int in_y) {
-    int random_number = random_number_generator(4)+2;
-    switch (random_number) {
-        case (int)Characters::Vegetation:
-            return *new Vegetation(in_x, in_y);
-        case (int)Characters::Herbivore:
-            return *new Herbivore(in_x, in_y);
-        case (int)Characters::Carnivore:
-            return *new Carnivore(in_x, in_y);
-        case (int)Characters::Omnivore:
-            return *new Omnivore(in_x, in_y);
-        default:
-            break;
-    }
-}
-
 Animal Simulation::character_generator(int in_x, int in_y, int character) {
     switch (character) {
         case (int)Characters::Vegetation:
