@@ -149,7 +149,7 @@ SinglyLinkedList &Map::getList() {
 }
 
 void Map::place_blocks() {
-    for(int i=0;i<settings.Block;i++){
+    for(int i=0;i<settings.Blocks;i++){
         int rand_i = rand() % y;
         int rand_j = rand() % x;
         board[rand_i][rand_j] = 1;
