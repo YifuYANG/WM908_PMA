@@ -39,7 +39,39 @@ void Map::display() {
         cout << string(x * 4, '-') << "-" << endl;
         // Display the contents of each cell in the current row
         for (int j = 0; j < x; j++) {
-            cout << "|" << DISPLAY[this->board[i][j]];
+            Animal *curr;
+            if(list.getByXY(i,j) != nullptr){
+                curr = list.getByXY(i,j)->getData();
+                if(DISPLAY[this->board[i][j]]==" T "){
+                    if(curr->getHp()<33 && curr->getHp()>=0){
+                        cout << "|" << " ‘ ";
+                    } else if (curr->getHp()<66 && curr->getHp()>=33){
+                        cout << "|" << " t ";
+                    } else {
+                        cout << "|" << DISPLAY[this->board[i][j]];
+                    }
+                } else if(DISPLAY[this->board[i][j]]==" H "){
+                    if(curr->getHp()<25){
+                        cout << "|" << " h ";
+                    } else {
+                        cout << "|" << DISPLAY[this->board[i][j]];
+                    }
+                } else if(DISPLAY[this->board[i][j]]==" C "){
+                    if(curr->getHp()<25){
+                        cout << "|" << " c ";
+                    } else {
+                        cout << "|" << DISPLAY[this->board[i][j]];
+                    }
+                } else if(DISPLAY[this->board[i][j]]==" O "){
+                    if(curr->getHp()<25){
+                        cout << "|" << " o ";
+                    } else {
+                        cout << "|" << DISPLAY[this->board[i][j]];
+                    }
+                }
+            } else {
+                cout << "|" << DISPLAY[this->board[i][j]];
+            }
         }
         cout << "| " << i + 1 << endl;
     }

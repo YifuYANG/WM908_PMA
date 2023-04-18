@@ -16,7 +16,7 @@ Simulation &Simulation::display() {
     }
     //display counter
     display_counter();
-    initializedBoard->getList().printList();
+//    initializedBoard->getList().printList();
     return *this;
 }
 
@@ -56,7 +56,7 @@ Simulation& Simulation::move_oneRound() {
 }
 
 Simulation & Simulation::place_random_characters_at_random_locations_on_the_board() {
-    for(int i=0;i<30; i++){
+    for(int i=0;i<15; i++){
         int rand_X;
         int rand_Y;
         Animal rand_an;
@@ -196,9 +196,6 @@ void Simulation::reproduction(Animal* animal) {
     mt19937 gen(rd());
     uniform_real_distribution<> dis(0, 1);
     double per= dis(gen);
-    cout<<"P: "<< per<<endl;
-    cout<<"FR: "<<FR<<endl;
-    cout<<"+++++++++"<<endl;
     if(per < FR){
         Animal offspring = determine_parent_and_generator_offspring(animal);
         if(determine_if_there_are_spaces_for_reproduction(animal->getX(),animal->getY())){

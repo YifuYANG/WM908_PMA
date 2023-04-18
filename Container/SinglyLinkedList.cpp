@@ -50,7 +50,7 @@ Node* SinglyLinkedList::getByXY(int x, int y) {
         temp = temp->getNext();
     }
 
-    cout << "XY not found: " <<x<<" X "<<y<<endl;
+    //cout << "XY not found: " <<x<<" X "<<y<<endl;
     return nullptr;
 }
 
