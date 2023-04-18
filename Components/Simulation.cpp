@@ -192,43 +192,33 @@ Simulation& Simulation::reproduction() {
     head = initializedBoard->getList().getHead();
     Node* temp = head;
     while (temp!= nullptr){
-        count_character();
+        int total_t = count_T();
+        int total_h = count_H();
+        int total_c = count_C();
         if (temp->getData()->getCharacter() == (int) Characters::Vegetation) {
-            if(T_total < (initializedBoard->getX() * initializedBoard->getY())/6){
+            if(total_t < (initializedBoard->getX() * initializedBoard->getY())/6){
                 place_random_T_at_random_locations_on_the_board(1);
-            } else if(T_total >= (initializedBoard->getX() * initializedBoard->getY())/3){
+            } else if(total_t >= (initializedBoard->getX() * initializedBoard->getY())/3){
                 temp = temp->getNext();
                 continue;
             }
-            T_total=0;
-            C_total=0;
-            O_total=0;
-            H_total=0;
         }
         if(temp->getData()->getCharacter() == (int)Characters::Herbivore){
-            if(H_total < (initializedBoard->getX() * initializedBoard->getY())/6){
+            if(total_h < (initializedBoard->getX() * initializedBoard->getY())/6){
                 place_random_H_at_random_locations_on_the_board(1);
-            } else if(H_total >= (initializedBoard->getX() * initializedBoard->getY())/3){
+            } else if(total_h >= (initializedBoard->getX() * initializedBoard->getY())/3){
                 temp = temp->getNext();
                 continue;
             }
-            T_total=0;
-            C_total=0;
-            O_total=0;
-            H_total=0;
         }
 
         if(temp->getData()->getCharacter() == (int)Characters::Carnivore){
-            if(C_total < (initializedBoard->getX() * initializedBoard->getY())/6){
+            if(total_c < (initializedBoard->getX() * initializedBoard->getY())/6){
                 place_random_C_at_random_locations_on_the_board(1);
-            } else if(C_total >= (initializedBoard->getX() * initializedBoard->getY())/5){
+            } else if(total_c >= (initializedBoard->getX() * initializedBoard->getY())/5){
                 temp = temp->getNext();
                 continue;
             }
-            T_total=0;
-            C_total=0;
-            O_total=0;
-            H_total=0;
         }
         Animal* animal = temp->getData();
         double FR = animal->getFr();
@@ -247,10 +237,6 @@ Simulation& Simulation::reproduction() {
                 initializedBoard->store_animals_to_container(offspring.getCharacter(),offspring.getX(),offspring.getY());
             }
         }
-        T_total=0;
-        C_total=0;
-        O_total=0;
-        H_total=0;
         temp=temp->getNext();
     }
     return * this;
@@ -305,7 +291,7 @@ bool Simulation:: determine_if_there_are_spaces_for_reproduction(int x,int y){
     }
 }
 
-Simulation &Simulation::count_character() {
+Simulation &Simulation::count_ave_character() {
     int T_counter=0;
     int H_counter=0;
     int C_counter=0;
@@ -325,6 +311,7 @@ Simulation &Simulation::count_character() {
         }
         temp=temp->getNext();
     }
+    number_of_steps++;
     T_total+=T_counter;
     C_total+=C_counter;
     O_total+=O_counter;
@@ -386,6 +373,62 @@ void Simulation::place_random_O_at_random_locations_on_the_board(int amount) {
         } while(!initializedBoard->placeAt(rand_an));
         initializedBoard->store_animals_to_container(rand_an.getCharacter(),rand_X,rand_Y);
     }
+}
+
+int Simulation::count_T() {
+    int T_counter=0;
+    head = initializedBoard->getList().getHead();
+    Node* temp = head;
+    while (temp != nullptr){
+        int character = temp->getData()->getCharacter();
+        if(character == (int) Characters::Vegetation){
+            T_counter++;
+        }
+        temp=temp->getNext();
+    }
+    return T_counter;
+}
+
+int Simulation::count_H() {
+    int H_counter=0;
+    head = initializedBoard->getList().getHead();
+    Node* temp = head;
+    while (temp != nullptr){
+        int character = temp->getData()->getCharacter();
+        if (character == (int) Characters::Herbivore){
+            H_counter++;
+        }
+        temp=temp->getNext();
+    }
+    return H_counter;
+}
+
+int Simulation::count_C() {
+    int C_counter=0;
+    head = initializedBoard->getList().getHead();
+    Node* temp = head;
+    while (temp != nullptr){
+        int character = temp->getData()->getCharacter();
+        if(character == (int) Characters::Carnivore){
+            C_counter++;
+        }
+        temp=temp->getNext();
+    }
+    return C_counter;
+}
+
+int Simulation::count_O() {
+    int O_counter=0;
+    head = initializedBoard->getList().getHead();
+    Node* temp = head;
+    while (temp != nullptr){
+        int character = temp->getData()->getCharacter();
+        if(character == (int) Characters::Omnivore){
+            O_counter++;
+        }
+        temp=temp->getNext();
+    }
+    return O_counter;
 }
 
 

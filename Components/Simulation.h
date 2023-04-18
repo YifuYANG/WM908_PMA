@@ -47,6 +47,14 @@ private:
 
     void place_random_O_at_random_locations_on_the_board(int amount);
 
+    int count_T();
+
+    int count_H();
+
+    int count_C();
+
+    int count_O();
+
 public:
     int T_total=0;
     int C_total=0;
@@ -65,7 +73,7 @@ public:
 
     Simulation & reproduction();
 
-    Simulation & count_character();
+    Simulation & count_ave_character();
 };
 
 
