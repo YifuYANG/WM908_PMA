@@ -30,7 +30,8 @@ public:
     double FR_C = 0.03;
     double FR_O = 0.03;
 
+    //simulation settings
+    int steps = 1000;
+    int number_of_simulations = 100;
 };
-
-
 #endif //PMA_SETTINGS_H

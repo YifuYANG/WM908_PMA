@@ -1,15 +1,17 @@
 #include "Components/Simulation.h"
 #include <random>
+#include "Settings/Settings.h"
 using namespace std;
 
 int main() {
-//    for(int i=0;i<100;i++){
+    Settings settings;
+
+//    for(int i=0;i<settings.number_of_simulations;i++){
 //        std::srand(time(nullptr));
 //        Simulation simulation;
 //        simulation.InitializeBoard().
 //                place_random_characters_at_random_locations_on_the_board();
-//
-//        for(int j=0;j<1000;j++){
+//        for(int j=0;j<settings.steps;j++){
 //            simulation.move_oneRound().
 //                    reproduction().
 //                    count_average_character();
@@ -21,6 +23,8 @@ int main() {
 //        cout<<"Average O over 1000 steps: "<<simulation.O_total/1000<<endl;
 //        cout<<"===================================="<<endl;
 //    }
+
+
 //    while(true){
 //        string input;
 //        cout << "Type anything to continue or q to quit: ";
@@ -40,7 +44,7 @@ int main() {
         simulation.InitializeBoard().
                 place_random_characters_at_random_locations_on_the_board().
                 display();
-        for(int j=0;j<1000;j++){
+        for(int j=0;j<settings.steps;j++){
             simulation.move_oneRound().
                     reproduction().
                     display();
