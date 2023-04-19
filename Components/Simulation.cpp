@@ -447,10 +447,6 @@ Simulation &Simulation::place_random_blocks() {
     return *this;
 }
 
-void Simulation::place_input_blocks_to_board(int input_x, int input_y) {
-    initializedBoard->board[input_x][input_y] = 1;
-}
-
 Simulation &Simulation::save_map() {
     ofstream outFile;
     outFile.open("../File_IO/Output_Document/Output.txt");
@@ -480,15 +476,45 @@ Simulation &Simulation::load_saved_map() {
     while (getline(file, line)) {
         for(int j=0;j<line.length();j++){
             char curr = line[j];
-            if(curr=='#'){
+            if(curr=='1'){
                 place_input_blocks_to_board(i,j);
+            } else if(curr=='2'){
+                place_input_T_to_board(i,j);
+                initializedBoard->store_animals_to_container((int)Characters::Vegetation,i,j);
+            } else if(curr=='3'){
+                place_input_H_to_board(i,j);
+                initializedBoard->store_animals_to_container((int)Characters::Herbivore,i,j);
+            } else if(curr=='4'){
+                place_input_C_to_board(i,j);
+                initializedBoard->store_animals_to_container((int)Characters::Carnivore,i,j);
+            } else if(curr=='5'){
+                place_input_O_to_board(i,j);
+                initializedBoard->store_animals_to_container((int)Characters::Omnivore,i,j);
             }
         }
         i++;
     }
     file.close();
-
     return *this;
+}
+void Simulation::place_input_blocks_to_board(int input_x, int input_y) {
+    initializedBoard->board[input_x][input_y] = 1;
+}
+
+void Simulation::place_input_T_to_board(int input_x, int input_y) {
+    initializedBoard->board[input_x][input_y] = 2;
+}
+
+void Simulation::place_input_H_to_board(int input_x, int input_y) {
+    initializedBoard->board[input_x][input_y] = 3;
+}
+
+void Simulation::place_input_C_to_board(int input_x, int input_y) {
+    initializedBoard->board[input_x][input_y] = 4;
+}
+
+void Simulation::place_input_O_to_board(int input_x, int input_y) {
+    initializedBoard->board[input_x][input_y] = 5;
 }
 
 

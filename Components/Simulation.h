@@ -57,6 +57,14 @@ private:
 
     void place_input_blocks_to_board(int x, int y);
 
+    void place_input_T_to_board(int x, int y);
+
+    void place_input_H_to_board(int x, int y);
+
+    void place_input_C_to_board(int x, int y);
+
+    void place_input_O_to_board(int x, int y);
+
 public:
     int T_total=0;
     int C_total=0;
