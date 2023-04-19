@@ -10,7 +10,8 @@ int main() {
 //        std::srand(time(nullptr));
 //        Simulation simulation;
 //        simulation.InitializeBoard().
-//                place_random_characters_at_random_locations_on_the_board();
+//        place_random_blocks().
+//        place_random_characters_at_random_locations_on_the_board();
 //        for(int j=0;j<settings.steps;j++){
 //            simulation.move_oneRound().
 //                    reproduction().
@@ -28,8 +29,9 @@ int main() {
 //    std::srand(time(nullptr));
 //    Simulation simulation;
 //    simulation.InitializeBoard().
-//        place_random_characters_at_random_locations_on_the_board().
-//        display();
+//    place_random_blocks().
+//    place_random_characters_at_random_locations_on_the_board().
+//    display();
 //    while(true){
 //        string input;
 //        cout << "Type anything to continue or q to quit: ";
@@ -47,6 +49,7 @@ int main() {
 //        std::srand(time(nullptr));
 //        Simulation simulation;
 //        simulation.InitializeBoard().
+//                place_random_blocks().
 //                place_random_characters_at_random_locations_on_the_board().
 //                display();
 //        for(int j=0;j<settings.steps;j++){
@@ -54,9 +57,38 @@ int main() {
 //                    reproduction().
 //                    display();
 //        }
-        srand(time(nullptr));
+
+//        srand(time(nullptr));
+//        Simulation simulation;
+//        simulation.Initialize_board_with_input_source().
+//        place_random_characters_at_random_locations_on_the_board().
+//        display();
+//
+//        simulation.
+//        move_oneRound().
+//        display().
+//        move_oneRound().
+//        display().
+//        move_oneRound().
+//        display();
+
+
+        std::srand(time(nullptr));
         Simulation simulation;
-        simulation.Initialize_board_with_input_source().
-        place_random_blocks().
-        display();
+        simulation.InitializeBoard().
+                place_random_blocks().
+                place_random_characters_at_random_locations_on_the_board().
+                display();
+        for(int j=0;j<settings.steps;j++){
+            simulation.move_oneRound().
+                    reproduction().
+                    display();
+        }
+        string input;
+        cout << "Type s to save the map: ";
+        cin >>input;
+        if(input=="s"){
+            simulation.save_map();
+            cout << "Map is saved to ../File_IO/Output_Document/Output.txt !!";
+        }
 }

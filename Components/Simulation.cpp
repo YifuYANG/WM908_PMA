@@ -5,7 +5,7 @@ Simulation::Simulation() = default;
 
 
 Simulation &Simulation::InitializeBoard() {
-    this->initializedBoard = new Map(settings.X,settings.Y);
+    this->initializedBoard = new Map(settings.Y,settings.X);
     return *this;
 }
 
@@ -423,12 +423,18 @@ Simulation &Simulation::Initialize_board_with_input_source() {
     getline(file, line);
     int y = stoi(line);
     this->initializedBoard = new Map(x,y);
-//    if (input.is_open()) {
-//        while (getline(input, line)) {
-//            cout << line << endl;
-//        }
-//        input.close();
-//    }
+
+    int i=0;
+    while (getline(file, line)) {
+        for(int j=0;j<line.length();j++){
+            char curr = line[j];
+            if(curr=='#'){
+                place_input_blocks_to_board(i,j);
+            }
+        }
+        i++;
+    }
+    file.close();
     return *this;
 }
 
@@ -438,6 +444,50 @@ Simulation &Simulation::place_random_blocks() {
         int rand_j = rand() % initializedBoard->getX();
         initializedBoard->board[rand_i][rand_j] = 1;
     }
+    return *this;
+}
+
+void Simulation::place_input_blocks_to_board(int input_x, int input_y) {
+    initializedBoard->board[input_x][input_y] = 1;
+}
+
+Simulation &Simulation::save_map() {
+    ofstream outFile;
+    outFile.open("../File_IO/Output_Document/Output.txt");
+    outFile<<initializedBoard->getX()<<endl;
+    outFile<<initializedBoard->getY()<<endl;
+    for(int i=0;i<initializedBoard->getY();i++){
+        for(int j=0;j<initializedBoard->getX();j++){
+            outFile << initializedBoard->board[i][j];
+        }
+        outFile<<endl;
+    }
+    outFile.close();
+    return *this;
+}
+
+Simulation &Simulation::load_saved_map() {
+    ifstream file("../File_IO/Output_Document/Output.txt");
+    string line;
+
+    getline(file, line);
+    int x = stoi(line);
+    getline(file, line);
+    int y = stoi(line);
+    this->initializedBoard = new Map(x,y);
+
+    int i=0;
+    while (getline(file, line)) {
+        for(int j=0;j<line.length();j++){
+            char curr = line[j];
+            if(curr=='#'){
+                place_input_blocks_to_board(i,j);
+            }
+        }
+        i++;
+    }
+    file.close();
+
     return *this;
 }
 

@@ -55,6 +55,8 @@ private:
 
     int count_O();
 
+    void place_input_blocks_to_board(int x, int y);
+
 public:
     int T_total=0;
     int C_total=0;
@@ -78,6 +80,10 @@ public:
     Simulation & place_random_blocks();
 
     Simulation & Initialize_board_with_input_source();
+
+    Simulation & save_map();
+
+    Simulation & load_saved_map();
 };
 
 
