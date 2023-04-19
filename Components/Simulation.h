@@ -3,7 +3,9 @@
 #include "Map.h"
 #include "Characters/Carnivore.h"
 #include"../Settings/Settings.h"
-
+#include <iostream>
+#include <fstream>
+#include <string>
 
 class Simulation {
 private:
@@ -72,6 +74,10 @@ public:
     Simulation & reproduction();
 
     Simulation & count_ave_character();
+
+    Simulation & place_random_blocks();
+
+    Simulation & Initialize_board_with_input_source();
 };
 
 

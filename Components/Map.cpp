@@ -23,7 +23,6 @@ Map::Map(int x, int y) {
             this->board[i][j] = 0;
         }
     }
-    place_blocks();
 }
 
 Map::~Map(){
@@ -146,12 +145,4 @@ void Map::store_animals_to_container(int character, int in_x, int in_y) {
 
 SinglyLinkedList &Map::getList() {
     return list;
-}
-
-void Map::place_blocks() {
-    for(int i=0;i<settings.Blocks;i++){
-        int rand_i = rand() % y;
-        int rand_j = rand() % x;
-        board[rand_i][rand_j] = 1;
-    }
 }

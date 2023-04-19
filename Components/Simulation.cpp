@@ -415,6 +415,32 @@ int Simulation::count_O() {
     return O_counter;
 }
 
+Simulation &Simulation::Initialize_board_with_input_source() {
+    ifstream file("../File_IO/Input_Document/Input.txt");
+    string line;
+    getline(file, line);
+    int x = stoi(line);
+    getline(file, line);
+    int y = stoi(line);
+    this->initializedBoard = new Map(x,y);
+//    if (input.is_open()) {
+//        while (getline(input, line)) {
+//            cout << line << endl;
+//        }
+//        input.close();
+//    }
+    return *this;
+}
+
+Simulation &Simulation::place_random_blocks() {
+    for(int i=0;i<settings.Blocks;i++){
+        int rand_i = rand() % initializedBoard->getY();
+        int rand_j = rand() % initializedBoard->getX();
+        initializedBoard->board[rand_i][rand_j] = 1;
+    }
+    return *this;
+}
+
 
 
 

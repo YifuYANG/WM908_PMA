@@ -28,8 +28,6 @@ private :
 
     bool check_boundary(int input_X, int input_Y);
 
-    void place_blocks();
-
 public:
 
     int **board;
