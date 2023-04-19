@@ -43,29 +43,29 @@ void Map::display() {
                 curr = list.getByXY(i,j)->getData();
                 if(DISPLAY[this->board[i][j]]==" T "){
                     if(curr->getHp()<33 && curr->getHp()>=0){
-                        cout << "|" << " ‘ ";
+                        cout << "|" << BLUE <<" ‘ "<<RESET;
                     } else if (curr->getHp()<66 && curr->getHp()>=33){
-                        cout << "|" << " t ";
+                        cout << "|" << BLUE <<" t "<< RESET;
                     } else {
-                        cout << "|" << DISPLAY[this->board[i][j]];
+                        cout << "|" << BLUE <<DISPLAY[this->board[i][j]]<<RESET;
                     }
                 } else if(DISPLAY[this->board[i][j]]==" H "){
                     if(curr->getHp()<25){
-                        cout << "|" << " h ";
+                        cout << "|" << GREEN <<" h "<<RESET;
                     } else {
-                        cout << "|" << DISPLAY[this->board[i][j]];
+                        cout << "|" << GREEN <<DISPLAY[this->board[i][j]]<<RESET;
                     }
                 } else if(DISPLAY[this->board[i][j]]==" C "){
                     if(curr->getHp()<25){
-                        cout << "|" << " c ";
+                        cout << "|" << RED <<" c "<< RESET;
                     } else {
-                        cout << "|" << DISPLAY[this->board[i][j]];
+                        cout << "|" << RED <<DISPLAY[this->board[i][j]]<< RESET;
                     }
                 } else if(DISPLAY[this->board[i][j]]==" O "){
                     if(curr->getHp()<25){
-                        cout << "|" << " o ";
+                        cout << "|" << YELLOW <<" o " << RESET;
                     } else {
-                        cout << "|" << DISPLAY[this->board[i][j]];
+                        cout << "|" << YELLOW << DISPLAY[this->board[i][j]] <<RESET;
                     }
                 }
             } else {

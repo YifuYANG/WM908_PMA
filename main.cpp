@@ -76,8 +76,8 @@ int main() {
 //        display();
 
 
-        std::srand(time(nullptr));
-        Simulation simulation;
+//        std::srand(time(nullptr));
+//        Simulation simulation;
 //        simulation.InitializeBoard().
 //                place_random_blocks().
 //                place_random_characters_at_random_locations_on_the_board().
@@ -94,9 +94,9 @@ int main() {
 //            simulation.save_map();
 //            cout << "Map is saved to ../File_IO/Output_Document/Output.txt !!";
 //        }
-        simulation.load_saved_map().
-        display().
-        move_oneRound().
-        reproduction().
-        display();
+//        simulation.load_saved_map().
+//        display().
+//        move_oneRound().
+//        reproduction().
+//        display();
 }
