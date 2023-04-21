@@ -140,9 +140,16 @@ void Map::store_animals_to_container(int character, int in_x, int in_y) {
         default:
             return;
     }
-    index++;
 }
 
 SinglyLinkedList &Map::getList() {
     return list;
+}
+
+void Map::getX_Y(int input_X, int input_Y) {
+    if(!check_boundary(input_X,input_Y)){
+        cout<<"Input: "<< input_X <<" X "<< input_Y <<" is out of bound"<<endl;
+    } else {
+        cout<<"Input: "<< input_X <<" X "<< input_Y <<" is: "<< board[input_X][input_Y]<<endl;
+    }
 }

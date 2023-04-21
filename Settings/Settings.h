@@ -6,9 +6,9 @@ using namespace std;
 class Settings {
 public:
     //map settings
-    int X = 14;
-    int Y = 14;
-    int Blocks = 12;
+    int X = 7;
+    int Y = 10;
+    int Blocks = 15;
     //characters settings
     int T = 20;
     int H = 20;

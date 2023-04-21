@@ -99,4 +99,22 @@ int main() {
 //        move_oneRound().
 //        reproduction().
 //        display();
+    srand(time(nullptr));
+//    Map map(10,7);
+//    int BlockCounter=0;
+//    while (BlockCounter<15){
+//        int rand_i = rand() % 7;
+//        int rand_j = rand() % 10;
+//        if(map.board[rand_i][rand_j] != 1) {
+//            map.board[rand_i][rand_j] = 1;
+//            BlockCounter++;
+//        }
+//    }
+
+//    map.display();
+    Simulation simulation;
+    simulation.
+    InitializeBoard().
+    place_random_blocks().
+    display();
 }

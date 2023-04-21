@@ -439,10 +439,14 @@ Simulation &Simulation::Initialize_board_with_input_source() {
 }
 
 Simulation &Simulation::place_random_blocks() {
-    for(int i=0;i<settings.Blocks;i++){
+    int BlockCounter=0;
+    while(BlockCounter<settings.Blocks){
         int rand_i = rand() % initializedBoard->getY();
         int rand_j = rand() % initializedBoard->getX();
-        initializedBoard->board[rand_i][rand_j] = 1;
+        if(initializedBoard->board[rand_i][rand_j]==0){
+            initializedBoard->board[rand_i][rand_j] = 1;
+            BlockCounter++;
+        }
     }
     return *this;
 }

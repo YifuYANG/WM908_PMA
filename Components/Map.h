@@ -24,8 +24,6 @@ private :
 
     int x=0,y=0;
 
-    int index=1;
-
     //block (#), vegetation (T), herbivore (H), carnivore (C), omnivore (O), hunter (R)
     const string DISPLAY [7] = {"   "," # "," T ", " H "," C "," O ", " R "};
 
@@ -55,6 +53,8 @@ public:
     SinglyLinkedList &getList();
 
     void store_animals_to_container(int character, int x, int y);
+
+    void getX_Y(int x, int y);
 };
 
 
