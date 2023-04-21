@@ -23,7 +23,6 @@ Simulation& Simulation::move_oneRound() {
     head = initializedBoard->getList().getHead();
     Node* temp = head;
     while (temp!= nullptr){
-        //wen yi wen
         Animal* animal = temp->getData();
         if(animal->getCharacter()==(int) Characters::Vegetation){
             temp=temp->getNext();

@@ -8,12 +8,12 @@ public:
     //map settings
     int X = 7;
     int Y = 10;
-    int Blocks = 15;
+    int Blocks = 12;
     //characters settings
-    int T = 20;
-    int H = 20;
-    int C = 20;
-    int O = 10;
+    int T = 3;
+    int H = 3;
+    int C = 3;
+    int O = 3;
 
     int T_HP = 100;
     int H_HP = 50;

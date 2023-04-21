@@ -52,13 +52,13 @@ int Animal::getY() {
 
 void Animal::move() {
     Direction drection=rand_direction_generator();
-    if((int)drection == 0){
+    if((int)drection == (int)Direction::North){
         X = X - 1;
-    } else if ((int)drection == 1){
+    } else if ((int)drection == (int)Direction::South){
         X = X + 1;
-    } else if ((int)drection == 2){
+    } else if ((int)drection == (int)Direction::East){
         Y = Y + 1;
-    } else if ((int)drection == 3){
+    } else if ((int)drection == (int)Direction::West){
         Y = Y - 1;
     }
 }

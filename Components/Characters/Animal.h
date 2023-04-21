@@ -28,11 +28,9 @@ public:
 
     void move();
 
-
     int getX();
 
     int getY();
-
 
     int getCharacter();
 

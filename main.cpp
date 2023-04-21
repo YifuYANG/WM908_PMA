@@ -116,5 +116,12 @@ int main() {
     simulation.
     InitializeBoard().
     place_random_blocks().
+    place_random_characters_at_random_locations_on_the_board().
+    display().
+    move_oneRound().
+    display().
+    move_oneRound().
+    display().
+    move_oneRound().
     display();
 }
