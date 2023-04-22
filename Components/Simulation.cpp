@@ -262,7 +262,7 @@ Animal Simulation::determine_parent_and_generator_offspring(Animal *animal) {
     }
 }
 
-//return true if at least one animal can be placed on the board.
+//return true if at least one of the four points of the parent can place the offspring
 bool Simulation:: determine_if_there_are_spaces_for_reproduction(int x,int y){
     if(initializedBoard->placeAt(*new Animal(x-1,y))
        || initializedBoard->placeAt(*new Animal(x+1,y))
