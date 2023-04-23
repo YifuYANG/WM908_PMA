@@ -4,7 +4,7 @@ This is a C++ program that simulates a board game. The game involves characters 
 
 # How to Run
 
-To run the program, please copy below code. 
+To run the program, please copy below codes. 
 
 To change the parameters, please go to [Setting.h](./Settings/Settings.h).
 
