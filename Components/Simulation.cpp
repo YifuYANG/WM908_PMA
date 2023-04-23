@@ -138,7 +138,7 @@ void Simulation::interaction(int next_x, int next_y, int pre_x, int pre_y) {
 }
 
 void Simulation::loss_HP_due_to_being_consumed(Animal *animal) {
-        animal->setHp(animal->getHp()-10);
+        animal->setHp(animal->getHp()-settings.amount_of_HP_lost);
 }
 
 void Simulation::loss_HP_due_to_hunger(Animal* animal) {
@@ -146,7 +146,7 @@ void Simulation::loss_HP_due_to_hunger(Animal* animal) {
 }
 
 void Simulation::get_HP_due_to_consuming(Animal *animal) {
-    animal->setHp(animal->getHp()+10);
+    animal->setHp(animal->getHp()+settings.amount_of_HP_lost);
 }
 
 void Simulation::remove_animals_with_no_HP() {
@@ -519,7 +519,3 @@ void Simulation::place_input_C_to_board(int input_x, int input_y) {
 void Simulation::place_input_O_to_board(int input_x, int input_y) {
     initializedBoard->board[input_x][input_y] = 5;
 }
-
-
-
-

@@ -25,11 +25,18 @@ public:
     int C_MP = 5;
     int O_MP = 8;
 
+    //second solution for simulating a balance environment
+//    double FR_T = 0.05;
+//    double FR_H = 0.05;
+//    double FR_C = 0.001;
+//    double FR_O = 0.015;
+
     double FR_T = 0.03;
     double FR_H = 0.03;
     double FR_C = 0.03;
     double FR_O = 0.03;
 
+    int amount_of_HP_lost = 10;
     //simulation settings
     int steps = 1000;
     int number_of_simulations = 100;
