@@ -38,7 +38,7 @@ public:
 
     int amount_of_HP_lost = 10;
     //simulation settings
-    int steps = 1000000;
+    int steps = 1000;
     int number_of_simulations = 100;
 };
 #endif //PMA_SETTINGS_H
